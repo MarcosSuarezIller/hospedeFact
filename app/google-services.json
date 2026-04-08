@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "678288344347",
+    "project_id": "hospedefact-d6163",
+    "storage_bucket": "hospedefact-d6163.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678288344347:android:3fac1bcd1d014ade96bfbe",
+        "android_client_info": {
+          "package_name": "com.example.hospedefact"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXyjEh5NXyxwg4VXXZbsex8-ewLAEo81g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
