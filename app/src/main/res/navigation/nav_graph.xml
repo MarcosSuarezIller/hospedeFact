@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <!-- FRAGMENTO: LoginFragment -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.hospedefact.ui.auth.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+
+        <!-- ACCIÓN: Login -> Dashboard -->
+        <action
+            android:id="@+id/action_login_to_dashboard"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- FRAGMENTO: DashboardFragment -->
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.example.hospedefact.ui.dashboard.DashboardFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_dashboard">
+
+        <!-- ACCIÓN: Dashboard -> Huéspedes -->
+        <action
+            android:id="@+id/action_dashboard_to_huespedes"
+            app:destination="@id/listaHuespedesFragment" />
+
+        <!-- ACCIÓN: Dashboard -> Login (logout) -->
+        <action
+            android:id="@+id/action_dashboard_to_login"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- FRAGMENTO: ListaHuespedesFragment -->
+    <fragment
+        android:id="@+id/listaHuespedesFragment"
+        android:name="com.example.hospedefact.ui.huespedes.ListaHuespedesFragment"
+        android:label="Huéspedes"
+        tools:layout="@layout/fragment_lista_huespedes">
+
+        <!-- ACCIÓN: Huéspedes -> Dashboard -->
+        <action
+            android:id="@+id/action_huespedes_to_dashboard"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+
+</navigation>

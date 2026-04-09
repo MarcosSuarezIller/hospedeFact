@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/card_bg">
+
+    <!-- Nombre del huésped -->
+    <TextView
+        android:id="@+id/text_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Juan Pérez"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#212121"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Habitación -->
+    <TextView
+        android:id="@+id/text_habitacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🛏️ Hab: 101"
+        android:textSize="14sp"
+        android:textColor="#757575"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Email -->
+    <TextView
+        android:id="@+id/text_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="juan@email.com"
+        android:textSize="12sp"
+        android:textColor="#9E9E9E" />
+
+</LinearLayout>

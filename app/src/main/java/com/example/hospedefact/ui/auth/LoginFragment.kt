@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.hospedefact.R
 
 /**
@@ -87,7 +88,10 @@ class LoginFragment : Fragment() {
                         mensajeTextView.setTextColor(android.graphics.Color.GREEN)
 
                         // TODO: Navegar a Dashboard
-                        // findNavController().navigate(R.id.action_login_to_dashboard)
+                        view.postDelayed({
+                            findNavController().navigate(R.id.action_login_to_dashboard)
+                        }, 1000)
+                        //findNavController().navigate(R.id.action_login_to_dashboard)
                     }
                     else -> {
                         progressBar.visibility = View.GONE

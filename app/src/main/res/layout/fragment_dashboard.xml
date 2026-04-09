@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FAFAFA">
+
+    <!-- Bienvenida -->
+    <TextView
+        android:id="@+id/texto_bienvenida"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bienvenido"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#2196F3"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Botón Huéspedes -->
+    <Button
+        android:id="@+id/btn_huespedes"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="👥 Huéspedes"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/button_color"
+        android:textColor="#FFFFFF" />
+
+    <!-- Botón Pedidos -->
+    <Button
+        android:id="@+id/btn_pedidos"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="🍽️ Pedidos"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/button_color"
+        android:textColor="#FFFFFF" />
+
+    <!-- Botón Facturas -->
+    <Button
+        android:id="@+id/btn_facturas"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="📄 Facturas"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/button_color"
+        android:textColor="#FFFFFF" />
+
+    <!-- Espaciador -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Botón Logout -->
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="🚪 Cerrar Sesión"
+        android:textSize="16sp"
+        android:background="@color/error_red"
+        android:textColor="#FFFFFF" />
+
+</LinearLayout>
