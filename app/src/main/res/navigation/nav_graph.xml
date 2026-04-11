@@ -32,12 +32,19 @@
             android:id="@+id/action_dashboard_to_huespedes"
             app:destination="@id/listaHuespedesFragment" />
 
+        <!-- ACCIÓN: Dashboard -> Pedidos -->
+        <action
+            android:id="@+id/action_dashboard_to_pedidos"
+            app:destination="@id/crearPedidoFragment" />
+
         <!-- ACCIÓN: Dashboard -> Login (logout) -->
         <action
             android:id="@+id/action_dashboard_to_login"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/dashboardFragment"
             app:popUpToInclusive="true" />
+
+
     </fragment>
 
     <!-- FRAGMENTO: ListaHuespedesFragment -->
@@ -50,6 +57,19 @@
         <!-- ACCIÓN: Huéspedes -> Dashboard -->
         <action
             android:id="@+id/action_huespedes_to_dashboard"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+
+    <!-- FRAGMENTO: CrearPedidoFragment -->
+    <fragment
+        android:id="@+id/crearPedidoFragment"
+        android:name="com.example.hospedefact.ui.pedidos.CrearPedidoFragment"
+        android:label="Crear Pedido"
+        tools:layout="@layout/fragment_crear_pedido">
+
+        <!-- ACCIÓN: Pedidos -> Dashboard -->
+        <action
+            android:id="@+id/action_pedidos_to_dashboard"
             app:destination="@id/dashboardFragment" />
     </fragment>
 

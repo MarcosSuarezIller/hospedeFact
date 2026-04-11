@@ -61,7 +61,7 @@ class DashboardFragment : Fragment() {
 
         btnPedidos.setOnClickListener {
             // TODO: Navegar a PedidosFragment
-            // findNavController().navigate(R.id.action_dashboard_to_pedidos)
+             findNavController().navigate(R.id.action_dashboard_to_pedidos)
         }
 
         btnFacturas.setOnClickListener {

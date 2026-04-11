@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/card_bg">
+
+    <!-- Nombre -->
+    <TextView
+        android:id="@+id/text_nombre_carrito"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hamburguesa"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#212121"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Precio unitario -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precio unitario: " />
+
+        <TextView
+            android:id="@+id/text_precio_carrito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="€12.00"
+            android:textStyle="bold"
+            android:textColor="#2196F3" />
+    </LinearLayout>
+
+    <!-- Cantidad y controles -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
+
+        <Button
+            android:id="@+id/btn_menos"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="−"
+            android:textSize="18sp"
+            android:background="@color/danger_red"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/text_cantidad"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_mas"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="+"
+            android:textSize="18sp"
+            android:background="@color/success_green"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- Subtotal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subtotal: " />
+
+        <TextView
+            android:id="@+id/text_subtotal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="€12.00"
+            android:textStyle="bold"
+            android:textColor="#2196F3" />
+
+        <Button
+            android:id="@+id/btn_eliminar"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="❌ Eliminar"
+            android:textSize="12sp"
+            android:paddingHorizontal="8dp"
+            android:background="@color/danger_red"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+</LinearLayout>
