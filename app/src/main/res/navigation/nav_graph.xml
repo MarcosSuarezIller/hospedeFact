@@ -44,6 +44,10 @@
             app:popUpTo="@id/dashboardFragment"
             app:popUpToInclusive="true" />
 
+        <!-- ACCIÓN: Dashboard -> Factura -->
+        <action
+            android:id="@+id/action_dashboard_to_factura"
+            app:destination="@id/generarFacturaFragment" />
 
     </fragment>
 
@@ -70,6 +74,37 @@
         <!-- ACCIÓN: Pedidos -> Dashboard -->
         <action
             android:id="@+id/action_pedidos_to_dashboard"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+
+    <!-- FRAGMENTO: GenerarFacturaFragment -->
+    <fragment
+        android:id="@+id/generarFacturaFragment"
+        android:name="com.example.hospedefact.ui.factura.GenerarFacturaFragment"
+        android:label="Generar Factura"
+        tools:layout="@layout/fragment_generar_factura">
+
+        <!-- ACCIÓN: Factura -> Dashboard -->
+        <action
+            android:id="@+id/action_factura_to_dashboard"
+            app:destination="@id/dashboardFragment" />
+
+        <!-- ACCIÓN: Factura -> Vista Factura -->
+        <action
+            android:id="@+id/action_generar_factura_to_vista"
+            app:destination="@id/vistaFacturaFragment" />
+    </fragment>
+
+    <!-- FRAGMENTO: VistaFacturaFragment -->
+    <fragment
+        android:id="@+id/vistaFacturaFragment"
+        android:name="com.example.hospedefact.ui.factura.VistaFacturaFragment"
+        android:label="Vista Factura"
+        tools:layout="@layout/fragment_vista_factura">
+
+        <!-- ACCIÓN: Vista Factura -> Dashboard -->
+        <action
+            android:id="@+id/action_vista_factura_to_dashboard"
             app:destination="@id/dashboardFragment" />
     </fragment>
 

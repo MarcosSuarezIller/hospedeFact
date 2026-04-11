@@ -66,7 +66,7 @@ class DashboardFragment : Fragment() {
 
         btnFacturas.setOnClickListener {
             // TODO: Navegar a FacturaFragment
-            // findNavController().navigate(R.id.action_dashboard_to_factura)
+             findNavController().navigate(R.id.action_dashboard_to_factura)
         }
 
         btnLogout.setOnClickListener {
