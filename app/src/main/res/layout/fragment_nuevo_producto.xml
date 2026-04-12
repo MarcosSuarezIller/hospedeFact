@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/btn_atras_nuevo_producto"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:text="←"
+                android:textSize="20sp"
+                android:layout_marginRight="8dp"
+                android:background="@color/button_color"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="📦 Nuevo Producto"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#2196F3" />
+        </LinearLayout>
+
+        <!-- Nombre -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre *"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/input_producto_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Ej: Hamburguesa"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Descripción -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descripción"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/input_descripcion"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Descripción del producto"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Proveedor -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Proveedor *"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <Spinner
+            android:id="@+id/spinner_proveedor_producto"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Stock Mínimo -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stock Mínimo"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/input_stock_minimo"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="5"
+            android:inputType="number"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Stock Máximo -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stock Máximo"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/input_stock_maximo"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="100"
+            android:inputType="number"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Ubicación -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ubicación"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/input_ubicacion"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Ej: A-1-3"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Precio Compra -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Precio Compra (€) *"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/input_precio_compra"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="8.50"
+            android:inputType="numberDecimal"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Precio Venta -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Precio Venta (€) *"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/input_precio_venta"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="12.50"
+            android:inputType="numberDecimal"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Progress Bar -->
+        <ProgressBar
+            android:id="@+id/progress_bar_nuevo_producto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
+
+        <!-- Botón Guardar -->
+        <Button
+            android:id="@+id/btn_guardar_producto"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="✅ Guardar Producto"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:background="@color/success_green"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+</ScrollView>

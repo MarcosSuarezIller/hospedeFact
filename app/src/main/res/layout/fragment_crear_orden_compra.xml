@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FAFAFA">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/btn_atras_crear_orden"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="←"
+            android:textSize="20sp"
+            android:layout_marginRight="8dp"
+            android:background="@color/button_color"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="📋 Nueva Orden"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#2196F3" />
+    </LinearLayout>
+
+    <!-- Proveedor -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Proveedor *"
+        android:textSize="13sp"
+        android:textColor="#757575"
+        android:layout_marginBottom="4dp" />
+
+    <Spinner
+        android:id="@+id/spinner_proveedor_orden"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/edit_text_bg"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Sección de agregar items -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:background="@drawable/card_bg"
+        android:layout_marginBottom="12dp">
+
+        <!-- Producto -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Producto *"
+            android:textSize="12sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <Spinner
+            android:id="@+id/spinner_producto_orden"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Cantidad -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cantidad *"
+            android:textSize="12sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/input_cantidad_orden"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="10"
+            android:inputType="number"
+            android:padding="8dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Botón agregar -->
+        <Button
+            android:id="@+id/btn_agregar_item"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="+ Agregar Item"
+            android:textSize="12sp"
+            android:background="@color/success_green"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- RecyclerView de items -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_items_orden"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Total -->
+    <TextView
+        android:id="@+id/text_total_orden_crear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Subtotal: €0.00\nIVA (21%): €0.00\nTotal: €0.00"
+        android:textSize="14sp"
+        android:typeface="monospace"
+        android:textStyle="bold"
+        android:padding="12dp"
+        android:background="@drawable/card_bg"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Notas -->
+    <EditText
+        android:id="@+id/input_notas_orden"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="Notas (opcional)"
+        android:inputType="textMultiLine"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_bg"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/progress_bar_crear_orden"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone" />
+
+    <!-- Botón crear -->
+    <Button
+        android:id="@+id/btn_crear_orden"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="✅ Crear Orden"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:background="@color/success_green"
+        android:textColor="#FFFFFF" />
+
+</LinearLayout>

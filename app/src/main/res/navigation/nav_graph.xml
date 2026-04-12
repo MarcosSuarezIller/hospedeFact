@@ -36,6 +36,10 @@
         <action
             android:id="@+id/action_dashboard_to_pedidos"
             app:destination="@id/crearPedidoFragment" />
+        <!-- ACCIÓN: Dashboard -> Almacén -->
+        <action
+            android:id="@+id/action_dashboard_to_almacen"
+            app:destination="@id/gestionarAlmacenFragment" />
 
         <!-- ACCIÓN: Dashboard -> Login (logout) -->
         <action
@@ -106,6 +110,144 @@
         <action
             android:id="@+id/action_vista_factura_to_dashboard"
             app:destination="@id/dashboardFragment" />
+    </fragment>
+
+    <!-- FRAGMENTO: GestionarAlmacenFragment -->
+    <fragment
+        android:id="@+id/gestionarAlmacenFragment"
+        android:name="com.example.hospedefact.ui.almacen.GestionarAlmacenFragment"
+        android:label="Almacén"
+        tools:layout="@layout/fragment_gestionar_almacen">
+
+        <action
+            android:id="@+id/action_almacen_to_dashboard"
+            app:destination="@id/dashboardFragment" />
+
+        <action
+            android:id="@+id/action_almacen_to_productos"
+            app:destination="@id/listaProductosFragment" />
+
+        <action
+            android:id="@+id/action_almacen_to_proveedores"
+            app:destination="@id/listaProveedoresFragment" />
+
+        <action
+            android:id="@+id/action_almacen_to_ordenes"
+            app:destination="@id/listaOrdenesCompraFragment" />
+
+        <action
+            android:id="@+id/action_almacen_to_alertas"
+            app:destination="@id/alertasStockFragment" />
+
+        <action
+            android:id="@+id/action_almacen_to_recepcion"
+            app:destination="@id/recepcionMercanciaFragment" />
+    </fragment>
+
+    <!-- FRAGMENTO: ListaProductosFragment -->
+    <fragment
+        android:id="@+id/listaProductosFragment"
+        android:name="com.example.hospedefact.ui.almacen.ListaProductosFragment"
+        android:label="Productos"
+        tools:layout="@layout/fragment_lista_productos">
+
+        <action
+            android:id="@+id/action_productos_to_almacen"
+            app:destination="@id/gestionarAlmacenFragment" />
+        <action
+            android:id="@+id/action_productos_to_nuevo_producto"
+            app:destination="@id/nuevoProductoFragment" />
+    </fragment>
+
+    <!-- FRAGMENTO: ListaProveedoresFragment -->
+    <fragment
+        android:id="@+id/listaProveedoresFragment"
+        android:name="com.example.hospedefact.ui.almacen.ListaProveedoresFragment"
+        android:label="Proveedores"
+        tools:layout="@layout/fragment_lista_proveedores">
+
+        <action
+            android:id="@+id/action_proveedores_to_almacen"
+            app:destination="@id/gestionarAlmacenFragment" />
+        <action
+            android:id="@+id/action_proveedores_to_nuevo_proveedor"
+            app:destination="@id/nuevoProveedorFragment" />
+    </fragment>
+
+    <!-- FRAGMENTO: ListaOrdenesCompraFragment -->
+    <fragment
+        android:id="@+id/listaOrdenesCompraFragment"
+        android:name="com.example.hospedefact.ui.almacen.ListaOrdenesCompraFragment"
+        android:label="Órdenes"
+        tools:layout="@layout/fragment_lista_ordenes_compra">
+
+        <action
+            android:id="@+id/action_ordenes_to_almacen"
+            app:destination="@id/gestionarAlmacenFragment" />
+
+        <action
+            android:id="@+id/action_ordenes_to_crear_orden"
+            app:destination="@id/crearOrdenCompraFragment" />
+    </fragment>
+
+    <!-- FRAGMENTO: AlertasStockFragment -->
+    <fragment
+        android:id="@+id/alertasStockFragment"
+        android:name="com.example.hospedefact.ui.almacen.AlertasStockFragment"
+        android:label="Alertas"
+        tools:layout="@layout/fragment_alertas_stock">
+
+        <action
+            android:id="@+id/action_alertas_to_almacen"
+            app:destination="@id/gestionarAlmacenFragment" />
+    </fragment>
+
+    <!-- FRAGMENTO: NuevoProductoFragment -->
+    <fragment
+        android:id="@+id/nuevoProductoFragment"
+        android:name="com.example.hospedefact.ui.almacen.NuevoProductoFragment"
+        android:label="Nuevo Producto"
+        tools:layout="@layout/fragment_nuevo_producto">
+
+        <action
+            android:id="@+id/action_nuevo_producto_to_productos"
+            app:destination="@id/listaProductosFragment" />
+    </fragment>
+
+    <!-- FRAGMENTO: NuevoProveedorFragment -->
+    <fragment
+        android:id="@+id/nuevoProveedorFragment"
+        android:name="com.example.hospedefact.ui.almacen.NuevoProveedorFragment"
+        android:label="Nuevo Proveedor"
+        tools:layout="@layout/fragment_nuevo_proveedor">
+
+        <action
+            android:id="@+id/action_nuevo_proveedor_to_proveedores"
+            app:destination="@id/listaProveedoresFragment" />
+    </fragment>
+
+    <!-- FRAGMENTO: CrearOrdenCompraFragment -->
+    <fragment
+        android:id="@+id/crearOrdenCompraFragment"
+        android:name="com.example.hospedefact.ui.almacen.CrearOrdenCompraFragment"
+        android:label="Crear Orden"
+        tools:layout="@layout/fragment_crear_orden_compra">
+
+        <action
+            android:id="@+id/action_crear_orden_to_ordenes"
+            app:destination="@id/listaOrdenesCompraFragment" />
+    </fragment>
+
+    <!-- FRAGMENTO: RecepcionMercanciaFragment -->
+    <fragment
+        android:id="@+id/recepcionMercanciaFragment"
+        android:name="com.example.hospedefact.ui.almacen.RecepcionMercanciaFragment"
+        android:label="Recepción"
+        tools:layout="@layout/fragment_recepcion_mercancia">
+
+        <action
+            android:id="@+id/action_recepcion_to_almacen"
+            app:destination="@id/gestionarAlmacenFragment" />
     </fragment>
 
 </navigation>

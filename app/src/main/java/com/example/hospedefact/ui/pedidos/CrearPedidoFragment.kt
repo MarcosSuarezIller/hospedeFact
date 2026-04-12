@@ -17,6 +17,8 @@ import com.example.hospedefact.R
 import com.example.hospedefact.data.models.Huesped
 import com.example.hospedefact.data.models.ItemPedido
 import com.example.hospedefact.data.models.MenuItem
+import com.example.hospedefact.data.models.ProductoAlmacen
+import com.example.hospedefact.ui.almacen.ProductoAlmacenViewModel
 import com.example.hospedefact.ui.huespedes.HuespedViewModel
 
 /**
@@ -143,8 +145,14 @@ class CrearPedidoFragment : Fragment() {
     /**
      * Carga menú desde Firestore
      */
+    /**
+     * CARGAR MENÚ DESDE ALMACÉN
+     * El menú es lo que hay disponible en el almacén
+     */
     private fun cargarMenu() {
-        viewModel.cargarMenu().observe(viewLifecycleOwner) { resultado ->
+        val productoViewModel = ProductoAlmacenViewModel()
+
+        productoViewModel.cargarProductos().observe(viewLifecycleOwner) { resultado ->
             when (resultado) {
                 "cargando" -> progressBar.visibility = View.VISIBLE
                 is String -> {
@@ -156,7 +164,20 @@ class CrearPedidoFragment : Fragment() {
                 is List<*> -> {
                     progressBar.visibility = View.GONE
                     @Suppress("UNCHECKED_CAST")
-                    val items = resultado as? List<MenuItem> ?: emptyList()
+                    val productosAlmacen = resultado as? List<ProductoAlmacen> ?: emptyList()
+
+                    // Convierte productos de almacén a MenuItem
+                    val items = productosAlmacen.map { producto ->
+                        MenuItem(
+                            id = producto.id,
+                            nombre = producto.nombre,
+                            descripcion = "${producto.descripcion} (Stock: ${producto.stockActual})",
+                            precio = producto.precioVenta,
+                            categoria = "almacen",
+                            activo = producto.stockActual > 0  // Solo activos si hay stock
+                        )
+                    }
+
                     menuAdapter.submitList(items)
                 }
             }
@@ -223,12 +244,13 @@ class CrearPedidoFragment : Fragment() {
     }
 
     /**
-     * Crea el pedido en Firebase
+     * Crea el pedido CON DESCUENTO DE STOCK
      */
     private fun crearPedido() {
         val huesped = huespedSeleccionado ?: return
 
-        viewModel.crearPedido(huesped.id, carrito.toList())
+        //viewModel.crearPedido(huesped.id, carrito.toList())
+        viewModel.crearPedidoConStockDescontado(huesped.id, carrito.toList())
             .observe(viewLifecycleOwner) { resultado ->
                 when (resultado) {
                     "exito" -> {

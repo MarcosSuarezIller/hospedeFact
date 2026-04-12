@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/card_bg">
+
+    <!-- Nombre -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_item_detalles_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/text_item_detalles_cantidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="10 un."
+            android:textSize="12sp"
+            android:textColor="#757575" />
+    </LinearLayout>
+
+    <!-- Precio -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="end">
+
+        <TextView
+            android:id="@+id/text_item_detalles_precio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="€10.00"
+            android:textSize="12sp"
+            android:textColor="#2196F3"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/text_item_detalles_subtotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="€100.00"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#212121" />
+    </LinearLayout>
+
+</LinearLayout>

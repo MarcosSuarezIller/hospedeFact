@@ -23,6 +23,7 @@ class DashboardFragment : Fragment() {
     private lateinit var btnHuespedes: Button
     private lateinit var btnPedidos: Button
     private lateinit var btnFacturas: Button
+    private lateinit var btnAlmacen: Button
     private lateinit var btnLogout: Button
 
     // Texto de bienvenida
@@ -46,6 +47,7 @@ class DashboardFragment : Fragment() {
         btnHuespedes = view.findViewById(R.id.btn_huespedes)
         btnPedidos = view.findViewById(R.id.btn_pedidos)
         btnFacturas = view.findViewById(R.id.btn_facturas)
+        btnAlmacen = view.findViewById(R.id.btn_almacen)
         btnLogout = view.findViewById(R.id.btn_logout)
         textoBienvenida = view.findViewById(R.id.texto_bienvenida)
 
@@ -55,18 +57,20 @@ class DashboardFragment : Fragment() {
 
         // Listeners de botones
         btnHuespedes.setOnClickListener {
-            // TODO: Navegar a ListaHuespedesFragment
              findNavController().navigate(R.id.action_dashboard_to_huespedes)
         }
 
         btnPedidos.setOnClickListener {
-            // TODO: Navegar a PedidosFragment
              findNavController().navigate(R.id.action_dashboard_to_pedidos)
         }
 
         btnFacturas.setOnClickListener {
-            // TODO: Navegar a FacturaFragment
              findNavController().navigate(R.id.action_dashboard_to_factura)
+        }
+
+        // Botón Almacén
+        btnAlmacen.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboard_to_almacen)
         }
 
         btnLogout.setOnClickListener {
