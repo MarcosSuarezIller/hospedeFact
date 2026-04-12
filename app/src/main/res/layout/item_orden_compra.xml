@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/card_bg">
+
+    <!-- ID de la orden -->
+    <TextView
+        android:id="@+id/text_orden_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Orden #ABC123"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#212121"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Proveedor -->
+    <TextView
+        android:id="@+id/text_proveedor_orden"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Proveedor: Nombre"
+        android:textSize="13sp"
+        android:textColor="#757575"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Fecha -->
+    <TextView
+        android:id="@+id/text_fecha_orden"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fecha: 11/04/2026"
+        android:textSize="12sp"
+        android:textColor="#757575"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Total -->
+    <TextView
+        android:id="@+id/text_total_orden"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total: €500.00"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="#2196F3"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Estado -->
+    <TextView
+        android:id="@+id/text_estado_orden"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="⏳ Pendiente"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Botones -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_detalles_orden"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="📖 Detalles"
+            android:textSize="12sp"
+            android:layout_marginRight="4dp"
+            android:background="@color/button_color"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_recibir_orden"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="✅ Recibir"
+            android:textSize="12sp"
+            android:layout_marginLeft="4dp"
+            android:background="@color/success_green"
+            android:textColor="#FFFFFF"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

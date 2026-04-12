@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/card_bg">
+
+    <!-- Fila 1: Nombre y Estado -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:id="@+id/text_producto_nombre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Nombre"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#212121" />
+
+        <TextView
+            android:id="@+id/text_estado_stock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✅ Normal"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="8dp" />
+    </LinearLayout>
+
+    <!-- Fila 2: Stock e Información -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:id="@+id/text_stock"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Stock: 50 unidades"
+            android:textSize="13sp"
+            android:textColor="#757575" />
+
+        <TextView
+            android:id="@+id/text_precio_producto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="€12.50"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="#2196F3" />
+    </LinearLayout>
+
+    <!-- Fila 3: Ubicación -->
+    <TextView
+        android:id="@+id/text_ubicacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📍 Ubicación: A-1-3"
+        android:textSize="12sp"
+        android:textColor="#9E9E9E"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Fila 4: Botones -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_editar_producto"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="✏️ Editar"
+            android:textSize="12sp"
+            android:layout_marginRight="4dp"
+            android:background="@color/button_color"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_movimiento_stock"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="📊 Movimientos"
+            android:textSize="12sp"
+            android:layout_marginLeft="4dp"
+            android:background="@color/secondary_green"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+</LinearLayout>

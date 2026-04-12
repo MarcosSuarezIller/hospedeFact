@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/btn_atras_nuevo_proveedor"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:text="←"
+                android:textSize="20sp"
+                android:layout_marginRight="8dp"
+                android:background="@color/button_color"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="🏢 Nuevo Proveedor"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#2196F3" />
+        </LinearLayout>
+
+        <!-- Nombre -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre Empresa *"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/input_proveedor_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Ej: Distribuidor ABC"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Contacto -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contacto"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/input_contacto"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Nombre de la persona"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Email -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email *"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/input_email_prov"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="email@proveedor.com"
+            android:inputType="textEmailAddress"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Teléfono -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Teléfono *"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/input_telefono_prov"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="666123456"
+            android:inputType="phone"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Dirección -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dirección"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/input_direccion"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Calle Principal 123"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Ciudad -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ciudad"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/input_ciudad"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Madrid"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="12dp" />
+
+        <!-- País -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="País"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/input_pais"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="España"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Código Postal -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Código Postal"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/input_codigo_postal"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="28001"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Tiempo de Entrega -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tiempo de Entrega (días)"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/input_tiempo_entrega"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="3"
+            android:inputType="number"
+            android:padding="12dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Progress Bar -->
+        <ProgressBar
+            android:id="@+id/progress_bar_nuevo_proveedor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
+
+        <!-- Botón Guardar -->
+        <Button
+            android:id="@+id/btn_guardar_proveedor"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="✅ Guardar Proveedor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:background="@color/success_green"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/card_bg">
+
+    <!-- Nombre -->
+    <TextView
+        android:id="@+id/text_proveedor_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre Proveedor"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#212121"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Contacto -->
+    <TextView
+        android:id="@+id/text_contacto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contacto: Juan Pérez"
+        android:textSize="13sp"
+        android:textColor="#757575"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Email -->
+    <TextView
+        android:id="@+id/text_email_proveedor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📧 email@ejemplo.com"
+        android:textSize="12sp"
+        android:textColor="#757575"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Teléfono -->
+    <TextView
+        android:id="@+id/text_telefono"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📱 666123456"
+        android:textSize="12sp"
+        android:textColor="#757575"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Tiempo de entrega -->
+    <TextView
+        android:id="@+id/text_tiempo_entrega"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="⏱️ Entrega: 3 días"
+        android:textSize="12sp"
+        android:textColor="#2196F3"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Botones -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_contactar"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="📧 Contactar"
+            android:textSize="12sp"
+            android:layout_marginRight="4dp"
+            android:background="@color/button_color"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_eliminar_proveedor"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="❌ Desactivar"
+            android:textSize="12sp"
+            android:layout_marginLeft="4dp"
+            android:background="@color/danger_red"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+</LinearLayout>

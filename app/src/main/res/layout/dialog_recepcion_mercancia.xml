@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FAFAFA">
+
+    <!-- Título -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📦 Recibir Orden"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#2196F3"
+        android:layout_marginBottom="16dp" />
+
+    <!-- ID de Orden -->
+    <TextView
+        android:id="@+id/text_orden_id_recepcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Orden #ABC123"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="#212121"
+        android:layout_marginBottom="4dp" />
+
+    <!-- Proveedor -->
+    <TextView
+        android:id="@+id/text_proveedor_recepcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Proveedor: Nombre"
+        android:textSize="13sp"
+        android:textColor="#757575"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Separador -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0"
+        android:layout_marginBottom="16dp" />
+
+    <!-- RecyclerView de items -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirma cantidades recibidas:"
+        android:textSize="13sp"
+        android:textColor="#757575"
+        android:layout_marginBottom="8dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_items_recepcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Separador -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Botones -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancelar_recepcion"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:text="Cancelar"
+            android:textSize="14sp"
+            android:layout_marginRight="8dp"
+            android:background="@color/button_color"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_confirmar_recepcion"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:text="✅ Confirmar Recepción"
+            android:textSize="14sp"
+            android:layout_marginLeft="8dp"
+            android:background="@color/success_green"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+</LinearLayout>

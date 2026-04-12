@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/card_bg">
+
+    <!-- Nombre del producto -->
+    <TextView
+        android:id="@+id/text_item_recepcion_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre del Producto"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="#212121"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Cantidad ordenada -->
+    <TextView
+        android:id="@+id/text_cantidad_ordenada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ordenado: 10 unidades"
+        android:textSize="12sp"
+        android:textColor="#757575"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Cantidad recibida -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recibido:"
+            android:textSize="12sp"
+            android:textColor="#757575"
+            android:layout_marginRight="8dp" />
+
+        <Button
+            android:id="@+id/btn_menos_recepcion"
+            android:layout_width="40dp"
+            android:layout_height="36dp"
+            android:text="−"
+            android:textSize="16sp"
+            android:background="@color/danger_red"
+            android:textColor="#FFFFFF"
+            android:layout_marginRight="4dp" />
+
+        <EditText
+            android:id="@+id/input_cantidad_recibida"
+            android:layout_width="60dp"
+            android:layout_height="36dp"
+            android:text="10"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginHorizontal="4dp" />
+
+        <Button
+            android:id="@+id/btn_mas_recepcion"
+            android:layout_width="40dp"
+            android:layout_height="36dp"
+            android:text="+"
+            android:textSize="16sp"
+            android:background="@color/success_green"
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="4dp" />
+    </LinearLayout>
+
+</LinearLayout>

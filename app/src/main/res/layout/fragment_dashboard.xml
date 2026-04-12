@@ -39,6 +39,17 @@
         android:background="@color/button_color"
         android:textColor="#FFFFFF" />
 
+    <!-- Botón Almacén -->
+    <Button
+        android:id="@+id/btn_almacen"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="📦 Almacén"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/button_color"
+        android:textColor="#FFFFFF" />
+
     <!-- Botón Facturas -->
     <Button
         android:id="@+id/btn_facturas"
