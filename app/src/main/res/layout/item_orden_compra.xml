@@ -60,6 +60,35 @@
         android:layout_marginBottom="8dp" />
 
     <!-- Botones -->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_detalles_orden"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="📖 Detalles"-->
+<!--            android:textSize="12sp"-->
+<!--            android:layout_marginRight="4dp"-->
+<!--            android:background="@color/button_color"-->
+<!--            android:textColor="#FFFFFF" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_recibir_orden"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="✅ Recibir"-->
+<!--            android:textSize="12sp"-->
+<!--            android:layout_marginLeft="4dp"-->
+<!--            android:background="@color/success_green"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:visibility="gone" />-->
+<!--    </LinearLayout>-->
+    <!-- Fila 4: Botones -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,10 +99,21 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="📖 Detalles"
+            android:text="📖 Ver"
             android:textSize="12sp"
             android:layout_marginRight="4dp"
             android:background="@color/button_color"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_cambiar_estado"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="⚙️ Estado"
+            android:textSize="12sp"
+            android:layout_marginHorizontal="2dp"
+            android:background="@color/secondary_green"
             android:textColor="#FFFFFF" />
 
         <Button
@@ -81,7 +121,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:text="✅ Recibir"
+            android:text="📥 Recibir"
             android:textSize="12sp"
             android:layout_marginLeft="4dp"
             android:background="@color/success_green"

@@ -114,6 +114,27 @@ class OrdenCompraRepository(
     }
 
     /**
+     * Cambia el estado de una orden de compra
+     * pendiente → confirmada → entregada
+     */
+    suspend fun cambiarEstadoOrden(ordenId: String, nuevoEstado: String): Result<Unit> = try {
+        Log.d(TAG, "Cambiando estado de orden: $ordenId -> $nuevoEstado")
+
+        val resultado = actualizarEstadoOrden(ordenId, nuevoEstado)
+
+        if (resultado.isSuccess) {
+            Log.d(TAG, "Estado actualizado exitosamente")
+            Result.success(Unit)
+        } else {
+            Result.failure(resultado.exceptionOrNull() ?: Exception("Error desconocido"))
+        }
+
+    } catch (e: Exception) {
+        Log.e(TAG, "Error al cambiar estado", e)
+        Result.failure(e)
+    }
+
+    /**
      * CORE: Recibir mercancía (marcar orden como entregada)
      * Automáticamente agrega stock a los productos
      */

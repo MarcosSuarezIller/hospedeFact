@@ -156,37 +156,24 @@ class OrdenCompraViewModel(
     }
 
     /**
-     * Cambia estado de orden (de pendiente a confirmada)
+     * Cambia el estado de una orden
+     * Ejemplo: "pendiente" → "confirmada"
      */
     fun cambiarEstadoOrden(ordenId: String, nuevoEstado: String) = liveData(Dispatchers.IO) {
         try {
-            Log.d(TAG, "Cambiando estado de orden: $ordenId -> $nuevoEstado")
+            Log.d(TAG, "Cambiando estado: $ordenId -> $nuevoEstado")
             emit("cargando")
 
-            // Obtener la orden
-            val ordenResult = repository.obtenerOrdenPorId(ordenId)
+            val resultado = repository.cambiarEstadoOrden(ordenId, nuevoEstado)
 
-            if (ordenResult.isSuccess) {
-                val orden = ordenResult.getOrNull()
-                if (orden != null) {
-                    // Actualizar estado
-                    val ordenActualizada = orden.copy(estado = nuevoEstado)
-                    val resultado = repository.actualizarEstadoOrden(ordenId, nuevoEstado)
+            resultado.onSuccess {
+                Log.d(TAG, "Estado cambiado exitosamente")
+                emit("exito")
+            }
 
-                    resultado.onSuccess {
-                        Log.d(TAG, "Estado actualizado")
-                        emit("exito")
-                    }
-
-                    resultado.onFailure { exception ->
-                        Log.e(TAG, "Error", exception)
-                        emit("error: ${exception.message}")
-                    }
-                } else {
-                    emit("error: Orden no encontrada")
-                }
-            } else {
-                emit("error: ${ordenResult.exceptionOrNull()?.message}")
+            resultado.onFailure { exception ->
+                Log.e(TAG, "Error", exception)
+                emit("error: ${exception.message}")
             }
 
         } catch (e: Exception) {

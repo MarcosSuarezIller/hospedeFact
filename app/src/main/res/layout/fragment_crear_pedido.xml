@@ -43,12 +43,30 @@
         android:textColor="#757575"
         android:layout_marginBottom="4dp" />
 
+    <!-- Spinner huesped -->
     <Spinner
         android:id="@+id/spinner_huesped"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/edit_text_bg" />
+
+    <!-- Spinner Mesa -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mesa (Restauracion)"
+        android:textSize="13sp"
+        android:textColor="#757575"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="4dp" />
+
+    <Spinner
+        android:id="@+id/spinner_mesa"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/edit_text_bg"
+        android:layout_marginBottom="12dp" />
 
     <!-- Sección Menú -->
     <TextView

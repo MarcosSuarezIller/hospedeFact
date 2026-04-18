@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container_mesa"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="12dp"
+    android:layout_margin="4dp"
+    android:background="@drawable/card_bg">
+
+    <TextView
+        android:id="@+id/text_numero_mesa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mesa 1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#212121"
+        android:textAlignment="center"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/text_capacidad_mesa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cap: 4"
+        android:textSize="12sp"
+        android:textColor="#757575"
+        android:textAlignment="center"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/text_estado_mesa_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Disponible"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center" />
+
+</LinearLayout>

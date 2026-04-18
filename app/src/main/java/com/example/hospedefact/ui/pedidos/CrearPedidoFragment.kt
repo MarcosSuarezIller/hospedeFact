@@ -17,9 +17,11 @@ import com.example.hospedefact.R
 import com.example.hospedefact.data.models.Huesped
 import com.example.hospedefact.data.models.ItemPedido
 import com.example.hospedefact.data.models.MenuItem
+import com.example.hospedefact.data.models.Mesa
 import com.example.hospedefact.data.models.ProductoAlmacen
 import com.example.hospedefact.ui.almacen.ProductoAlmacenViewModel
 import com.example.hospedefact.ui.huespedes.HuespedViewModel
+import com.example.hospedefact.ui.restauracion.MesaViewModel
 
 /**
  * CrearPedidoFragment
@@ -30,21 +32,23 @@ class CrearPedidoFragment : Fragment() {
 
     private lateinit var viewModel: PedidoViewModel
     private lateinit var huespedViewModel: HuespedViewModel
-
     private lateinit var spinnerHuesped: Spinner
+    private lateinit var spinnerMesa: Spinner
     private lateinit var recyclerMenu: RecyclerView
     private lateinit var recyclerCarrito: RecyclerView
     private lateinit var btnAtras: Button
     private lateinit var btnCrearPedido: Button
     private lateinit var textTotal: TextView
     private lateinit var progressBar: ProgressBar
-
     private lateinit var menuAdapter: MenuAdapter
     private lateinit var carritoAdapter: CarritoAdapter
-
     private var huespedes = mutableListOf<Huesped>()
     private var huespedSeleccionado: Huesped? = null
     private var carrito = mutableListOf<ItemPedido>()
+
+    private var mesasDisponibles = mutableListOf<Mesa>()
+
+    private var mesaSeleccionada: Mesa? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,6 +66,7 @@ class CrearPedidoFragment : Fragment() {
 
         // Obtiene referencias
         spinnerHuesped = view.findViewById(R.id.spinner_huesped)
+        spinnerMesa = view.findViewById(R.id.spinner_mesa)
         recyclerMenu = view.findViewById(R.id.recycler_menu)
         recyclerCarrito = view.findViewById(R.id.recycler_carrito)
         btnAtras = view.findViewById(R.id.btn_atras_pedido)
@@ -104,6 +109,8 @@ class CrearPedidoFragment : Fragment() {
         // Carga huéspedes
         cargarHuespedes()
 
+        cargarMesasDisponibles()
+
         // Carga menú
         cargarMenu()
     }
@@ -135,6 +142,41 @@ class CrearPedidoFragment : Fragment() {
 
                         override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {
                             huespedSeleccionado = null
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private fun cargarMesasDisponibles() {
+        val mesaViewModel = MesaViewModel()
+
+        mesaViewModel.cargarMesasDisponibles().observe(viewLifecycleOwner) { resultado ->
+            when (resultado) {
+                is String -> {
+                    if (resultado.startsWith("error")) {
+                        Toast.makeText(context, resultado, Toast.LENGTH_SHORT).show()
+                    }
+                }
+                is List<*> -> {
+                    @Suppress("UNCHECKED_CAST")
+                    mesasDisponibles = (resultado as? List<Mesa>)?.toMutableList() ?: mutableListOf()
+
+                    val adapter = android.widget.ArrayAdapter(
+                        requireContext(),
+                        android.R.layout.simple_spinner_item,
+                        mesasDisponibles.map { "Mesa ${it.numero} - Cap: ${it.capacidad}" }
+                    )
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    spinnerMesa.adapter = adapter
+
+                    spinnerMesa.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
+                            mesaSeleccionada = mesasDisponibles.getOrNull(position)
+                        }
+
+                        override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {
+                            mesaSeleccionada = null
                         }
                     }
                 }

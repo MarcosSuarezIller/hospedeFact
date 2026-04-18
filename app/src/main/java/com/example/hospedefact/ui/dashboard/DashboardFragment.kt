@@ -22,6 +22,7 @@ class DashboardFragment : Fragment() {
     // Botones del menú
     private lateinit var btnHuespedes: Button
     private lateinit var btnPedidos: Button
+    private lateinit var btnMesas: Button
     private lateinit var btnFacturas: Button
     private lateinit var btnAlmacen: Button
     private lateinit var btnLogout: Button
@@ -46,6 +47,7 @@ class DashboardFragment : Fragment() {
         // Obtiene referencias a los botones
         btnHuespedes = view.findViewById(R.id.btn_huespedes)
         btnPedidos = view.findViewById(R.id.btn_pedidos)
+        btnMesas = view.findViewById(R.id.btn_mesas)
         btnFacturas = view.findViewById(R.id.btn_facturas)
         btnAlmacen = view.findViewById(R.id.btn_almacen)
         btnLogout = view.findViewById(R.id.btn_logout)
@@ -64,6 +66,12 @@ class DashboardFragment : Fragment() {
              findNavController().navigate(R.id.action_dashboard_to_pedidos)
         }
 
+        btnMesas.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboard_to_admin_mesas)
+        }
+//        btnMesas.visibility = if (esGerente()) View.VISIBLE else View.GONE
+//        btnMesas.text = "Administrar Mesas"
+
         btnFacturas.setOnClickListener {
              findNavController().navigate(R.id.action_dashboard_to_factura)
         }
@@ -78,8 +86,12 @@ class DashboardFragment : Fragment() {
             firebaseAuth.signOut()
 
             // Navega de vuelta a LoginFragment
-            // TODO: Implementar navegación
             findNavController().navigate(R.id.action_dashboard_to_login)
         }
+    }
+
+    private fun esGerente(): Boolean {
+        val email = firebaseAuth.currentUser?.email ?: ""
+        return email.contains("gerente") || email.contains("admin")
     }
 }
