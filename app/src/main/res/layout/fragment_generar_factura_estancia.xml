@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FAFAFA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/btn_atras_factura_estancia"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="←"
+            android:textSize="20sp"
+            android:layout_marginRight="8dp"
+            android:background="@color/button_color"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Factura con Estancia"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#2196F3" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Selecciona un huesped"
+        android:textSize="13sp"
+        android:textColor="#757575"
+        android:layout_marginBottom="4dp" />
+
+    <Spinner
+        android:id="@+id/spinner_huesped_estancia"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/edit_text_bg"
+        android:layout_marginBottom="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:background="@drawable/card_bg"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detalle de Estancia"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/text_detalle_estancia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cargando..."
+            android:textSize="12sp"
+            android:typeface="monospace"
+            android:textColor="#757575" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:background="@drawable/card_bg"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Resumen de Factura"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/text_resumen_estancia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pedidos: €0.00\nEstancia: €0.00\nSubtotal: €0.00\nIVA: €0.00\nTotal: €0.00"
+            android:textSize="12sp"
+            android:typeface="monospace"
+            android:textStyle="bold"
+            android:textColor="#212121" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/input_fecha_salida"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Fecha salida (opcional)"
+        android:inputType="date"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_bg"
+        android:layout_marginBottom="12dp"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_factura_estancia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_generar_factura_estancia"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Generar Factura"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:background="@color/success_green"
+        android:textColor="#FFFFFF" />
+
+</LinearLayout>

@@ -84,16 +84,6 @@
         android:textColor="#FFFFFF" />
 
     <Button
-        android:id="@+id/btn_recepcion"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:text="📥 Recepción de Mercancía"
-        android:textSize="14sp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/button_color"
-        android:textColor="#FFFFFF" />
-
-    <Button
         android:id="@+id/btn_alertas"
         android:layout_width="match_parent"
         android:layout_height="56dp"

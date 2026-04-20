@@ -23,7 +23,18 @@ class OrdenCompraViewModel(
     }
 
     /**
-     * Crea nueva orden de compra
+     * Registra una nueva orden de compra en el sistema.
+     * Valida que la orden contenga al menos un producto antes de enviarla al repositorio.
+     * 
+     * @param proveedorId ID único del proveedor seleccionado.
+     * @param proveedorNombre Nombre del proveedor para visualización rápida.
+     * @param items Lista de productos y cantidades solicitadas.
+     * @param subtotal Suma base de los precios de los productos.
+     * @param impuestos Importe correspondiente a los impuestos aplicables.
+     * @param total Importe total final de la orden.
+     * @param fechaEntregaEsperada Timestamp de la fecha prevista para recibir el pedido.
+     * @param notas Comentarios adicionales para el proveedor o almacén.
+     * @return [LiveData] con el estado de la transacción ("exito", "cargando", "error:").
      */
     fun crearOrdenCompra(
         proveedorId: String,
@@ -77,7 +88,9 @@ class OrdenCompraViewModel(
     }
 
     /**
-     * Obtiene órdenes pendientes
+     * Recupera el listado de órdenes de compra que aún no han sido entregadas.
+     * 
+     * @return [LiveData] que emite la lista de órdenes pendientes o mensajes de estado.
      */
     fun obtenerOrdenesPendientes() = liveData(Dispatchers.IO) {
         try {
@@ -103,7 +116,9 @@ class OrdenCompraViewModel(
     }
 
     /**
-     * Obtiene todas las órdenes
+     * Obtiene el historial completo de todas las órdenes de compra emitidas.
+     * 
+     * @return [LiveData] con la colección de todas las órdenes.
      */
     fun obtenerTodasOrdenes() = liveData(Dispatchers.IO) {
         try {
@@ -129,8 +144,11 @@ class OrdenCompraViewModel(
     }
 
     /**
-     * CORE: Recibe mercancía (marca orden como entregada)
-     * Actualiza automáticamente el stock de productos
+     * Procesa la recepción física de los productos incluidos en una orden.
+     * Esta acción desencadena la actualización automática del stock de inventario.
+     * 
+     * @param ordenId ID de la orden que se está recibiendo.
+     * @return [LiveData] indicando el éxito del proceso y la actualización de stock.
      */
     fun recibirMercancia(ordenId: String) = liveData(Dispatchers.IO) {
         try {
@@ -156,8 +174,11 @@ class OrdenCompraViewModel(
     }
 
     /**
-     * Cambia el estado de una orden
-     * Ejemplo: "pendiente" → "confirmada"
+     * Actualiza el estado administrativo de una orden de compra (ej. de "pendiente" a "confirmada").
+     * 
+     * @param ordenId ID único de la orden.
+     * @param nuevoEstado Nombre del nuevo estado a aplicar.
+     * @return [LiveData] con el resultado de la operación.
      */
     fun cambiarEstadoOrden(ordenId: String, nuevoEstado: String) = liveData(Dispatchers.IO) {
         try {

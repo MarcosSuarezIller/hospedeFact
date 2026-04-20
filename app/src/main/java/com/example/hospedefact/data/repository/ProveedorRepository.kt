@@ -19,7 +19,10 @@ class ProveedorRepository {
     }
 
     /**
-     * CREAR: Nuevo proveedor
+     * Registra un nuevo proveedor en Firestore.
+     * 
+     * @param proveedor Objeto [Proveedor] con la información de contacto y fiscal.
+     * @return [Result] con el ID del documento creado o error.
      */
     suspend fun crearProveedor(proveedor: Proveedor): Result<String> = try {
         Log.d(TAG, "Creando proveedor: ${proveedor.nombre}")
@@ -37,7 +40,10 @@ class ProveedorRepository {
     }
 
     /**
-     * LEER: Obtener todos los proveedores activos
+     * Obtiene la lista de todos los proveedores que están marcados como activos.
+     * Realiza un ordenamiento por nombre en memoria para evitar la necesidad de índices complejos en Firestore.
+     * 
+     * @return [Result] con la lista de [Proveedor] encontrados.
      */
     suspend fun obtenerProveedores(): Result<List<Proveedor>> = try {
         Log.d(TAG, "Obteniendo proveedores")
@@ -58,7 +64,10 @@ class ProveedorRepository {
     }
 
     /**
-     * LEER: Obtener proveedor por ID
+     * Recupera un proveedor específico mediante su identificador único.
+     * 
+     * @param proveedorId ID del proveedor a buscar.
+     * @return [Result] con el objeto [Proveedor] si existe, o null.
      */
     suspend fun obtenerProveedorPorId(proveedorId: String): Result<Proveedor?> = try {
         Log.d(TAG, "Obteniendo proveedor: $proveedorId")
@@ -74,7 +83,10 @@ class ProveedorRepository {
     }
 
     /**
-     * ACTUALIZAR: Datos de proveedor
+     * Actualiza la información de un proveedor existente.
+     * 
+     * @param proveedor Objeto [Proveedor] con los datos actualizados e ID válido.
+     * @return [Result] indicando el éxito o fallo.
      */
     suspend fun actualizarProveedor(proveedor: Proveedor): Result<Unit> = try {
         Log.d(TAG, "Actualizando proveedor: ${proveedor.id}")
@@ -90,7 +102,10 @@ class ProveedorRepository {
     }
 
     /**
-     * DESACTIVAR: Proveedor (baja lógica)
+     * Realiza una baja lógica desactivando a un proveedor y cambiando su estado a "inactivo".
+     * 
+     * @param proveedorId ID del proveedor a desactivar.
+     * @return [Result] que indica el éxito o fallo de la operación.
      */
     suspend fun desactivarProveedor(proveedorId: String): Result<Unit> = try {
         Log.d(TAG, "Desactivando proveedor: $proveedorId")
@@ -121,7 +136,11 @@ class ProveedorRepository {
     }
 
     /**
-     * BUSCAR: Proveedores por nombre
+     * Filtra los proveedores activos cuyo nombre contenga la cadena especificada.
+     * La búsqueda no distingue entre mayúsculas y minúsculas.
+     * 
+     * @param nombre Cadena de texto a buscar en el nombre del proveedor.
+     * @return [Result] con la lista de proveedores que coinciden con el filtro.
      */
     suspend fun buscarProveedores(nombre: String): Result<List<Proveedor>> = try {
         Log.d(TAG, "Buscando proveedores: $nombre")

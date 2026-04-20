@@ -19,8 +19,9 @@ class MenuRepository {
     }
 
     /**
-     * Obtiene todos los items activos del menú
-     * Devuelve lista ordenada por categoría
+     * Obtiene todos los items del menú marcados como activos.
+     * 
+     * @return [Result] con la lista de [MenuItem] ordenados por categoría.
      */
     suspend fun cargarMenu(): Result<List<MenuItem>> = try {
         Log.d(TAG, "Cargando menú")
@@ -41,7 +42,10 @@ class MenuRepository {
     }
 
     /**
-     * Obtiene items de una categoría específica
+     * Obtiene los items del menú que pertenecen a una categoría específica.
+     * 
+     * @param categoria Nombre de la categoría a filtrar.
+     * @return [Result] con la lista de [MenuItem] filtrados y activos.
      */
     suspend fun cargarMenuPorCategoria(categoria: String): Result<List<MenuItem>> = try {
         Log.d(TAG, "Cargando menú de categoría: $categoria")
@@ -62,7 +66,10 @@ class MenuRepository {
     }
 
     /**
-     * Crea un nuevo item en el menú
+     * Crea un nuevo elemento en el menú de restauración.
+     * 
+     * @param item Objeto [MenuItem] con los datos a guardar.
+     * @return [Result] con el ID asignado al nuevo item.
      */
     suspend fun crearMenuItem(item: MenuItem): Result<String> = try {
         Log.d(TAG, "Creando item: ${item.nombre}")
@@ -80,7 +87,10 @@ class MenuRepository {
     }
 
     /**
-     * Actualiza un item del menú
+     * Actualiza los datos de un item existente en el menú.
+     * 
+     * @param item Objeto [MenuItem] con los datos actualizados e ID válido.
+     * @return [Result] que indica el éxito o fallo.
      */
     suspend fun actualizarMenuItem(item: MenuItem): Result<Unit> = try {
         Log.d(TAG, "Actualizando item: ${item.id}")
@@ -96,7 +106,10 @@ class MenuRepository {
     }
 
     /**
-     * Desactiva un item del menú (baja lógica)
+     * Realiza una baja lógica desactivando un item del menú.
+     * 
+     * @param itemId ID único del elemento a desactivar.
+     * @return [Result] que indica el éxito o fallo.
      */
     suspend fun desactivarMenuItem(itemId: String): Result<Unit> = try {
         Log.d(TAG, "Desactivando item: $itemId")
@@ -112,7 +125,9 @@ class MenuRepository {
     }
 
     /**
-     * Obtiene todas las categorías disponibles
+     * Obtiene una lista única de todas las categorías activas en el menú.
+     * 
+     * @return [Result] con la lista de nombres de categorías ordenadas.
      */
     suspend fun obtenerCategorias(): Result<List<String>> = try {
         Log.d(TAG, "Obteniendo categorías")

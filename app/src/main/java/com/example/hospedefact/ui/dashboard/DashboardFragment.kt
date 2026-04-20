@@ -26,6 +26,7 @@ class DashboardFragment : Fragment() {
     private lateinit var btnFacturas: Button
     private lateinit var btnAlmacen: Button
     private lateinit var btnLogout: Button
+    private lateinit var btnHabitaciones: Button
 
     // Texto de bienvenida
     private lateinit var textoBienvenida: TextView
@@ -48,6 +49,7 @@ class DashboardFragment : Fragment() {
         btnHuespedes = view.findViewById(R.id.btn_huespedes)
         btnPedidos = view.findViewById(R.id.btn_pedidos)
         btnMesas = view.findViewById(R.id.btn_mesas)
+        btnHabitaciones = view.findViewById(R.id.btn_habitaciones)
         btnFacturas = view.findViewById(R.id.btn_facturas)
         btnAlmacen = view.findViewById(R.id.btn_almacen)
         btnLogout = view.findViewById(R.id.btn_logout)
@@ -69,17 +71,25 @@ class DashboardFragment : Fragment() {
         btnMesas.setOnClickListener {
             findNavController().navigate(R.id.action_dashboard_to_admin_mesas)
         }
-//        btnMesas.visibility = if (esGerente()) View.VISIBLE else View.GONE
-//        btnMesas.text = "Administrar Mesas"
+        btnMesas.visibility = if (esGerente()) View.VISIBLE else View.GONE
+        btnMesas.text = "Administrar Mesas"
 
         btnFacturas.setOnClickListener {
-             findNavController().navigate(R.id.action_dashboard_to_factura)
+            mostrarMenuFacturas()
         }
+
+        btnHabitaciones.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboard_to_admin_habitaciones)
+        }
+        btnHabitaciones.visibility = if (esGerente()) View.VISIBLE else View.GONE
+        btnHabitaciones.text = "Administrar Habitaciones"
 
         // Botón Almacén
         btnAlmacen.setOnClickListener {
             findNavController().navigate(R.id.action_dashboard_to_almacen)
         }
+
+
 
         btnLogout.setOnClickListener {
             // Cierra sesión
@@ -88,6 +98,25 @@ class DashboardFragment : Fragment() {
             // Navega de vuelta a LoginFragment
             findNavController().navigate(R.id.action_dashboard_to_login)
         }
+    }
+
+    private fun mostrarMenuFacturas() {
+        val opciones = arrayOf(
+            "Factura de Huesped (sin estancia)",
+            "Factura de Huesped (con estancia)",
+            "Factura de Mesa"
+        )
+
+        android.app.AlertDialog.Builder(requireContext())
+            .setTitle("Tipo de Factura")
+            .setItems(opciones) { _, which ->
+                when (which) {
+                    0 -> findNavController().navigate(R.id.action_dashboard_to_generar_factura)
+                    1 -> findNavController().navigate(R.id.action_dashboard_to_factura_estancia)
+                    2 -> findNavController().navigate(R.id.action_dashboard_to_factura_mesas)
+                }
+            }
+            .show()
     }
 
     private fun esGerente(): Boolean {

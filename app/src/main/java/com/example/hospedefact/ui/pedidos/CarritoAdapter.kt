@@ -12,8 +12,11 @@ import com.example.hospedefact.R
 import com.example.hospedefact.data.models.ItemPedido
 
 /**
- * Adaptador para RecyclerView del Carrito
- * Muestra items agregados al carrito
+ * Adaptador para el RecyclerView que gestiona la visualización del carrito de compras.
+ * Permite listar los productos seleccionados para un pedido y ajustar sus cantidades o eliminarlos.
+ *
+ * @property onCantidadChange Callback que se ejecuta cuando se modifica la cantidad de un artículo.
+ * @property onEliminar Callback que se ejecuta cuando se decide quitar un artículo del carrito.
  */
 class CarritoAdapter(
     private val onCantidadChange: (ItemPedido, Int) -> Unit,
@@ -22,6 +25,9 @@ class CarritoAdapter(
 
     /**
      * ViewHolder para cada item del carrito
+     */
+    /**
+     * ViewHolder que gestiona la representación visual de un artículo individual dentro del carrito.
      */
     inner class CarritoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val nombre: TextView = itemView.findViewById(R.id.text_nombre_carrito)
@@ -32,6 +38,13 @@ class CarritoAdapter(
         private val btnMas: Button = itemView.findViewById(R.id.btn_mas)
         private val btnEliminar: Button = itemView.findViewById(R.id.btn_eliminar)
 
+        /**
+         * Vincula los datos de un [ItemPedido] con las vistas correspondientes.
+         * Calcula dinámicamente el subtotal del ítem basándose en la cantidad y el precio unitario.
+         * Configura los listeners para los botones de incremento, decremento y eliminación.
+         * 
+         * @param item El artículo del pedido que se va a mostrar.
+         */
         fun bind(item: ItemPedido) {
             nombre.text = item.nombre
             cantidad.text = item.cantidad.toString()
@@ -69,7 +82,8 @@ class CarritoAdapter(
     }
 
     /**
-     * DiffCallback para optimizar actualizaciones
+     * Implementación de [DiffUtil.ItemCallback] para optimizar la actualización de la lista
+     * del carrito, comparando los artículos por su identificador único.
      */
     class DiffCallback : DiffUtil.ItemCallback<ItemPedido>() {
         override fun areItemsTheSame(oldItem: ItemPedido, newItem: ItemPedido) =

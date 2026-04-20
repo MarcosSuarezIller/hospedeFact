@@ -5,12 +5,15 @@ package com.example.hospedefact.data.models
  * Representa a un cliente que se hospeda en el hotel
  */
 data class Huesped(
-    val id: String = "",                              // ID único de Firestore
-    val nombre: String = "",                          // Nombre del huésped
-    val email: String = "",                           // Email
-    val telefono: String = "",                        // Teléfono de contacto
-    val habitacion: String = "",                      // Número de habitación
-    val fechaEntrada: Long = 0,                       // Cuándo llega (timestamp)
-    val fechaSalida: Long = 0,                        // Cuándo se va (timestamp)
-    val estado: String = "activo"                     // "activo" o "checkout"
+    val id: String = "",
+    val nombre: String = "",
+    val habitacion: String = "",
+    val habitacionId: String = "",
+    val estado: String = "activo",
+    val fechaEntrada: Long = System.currentTimeMillis(),
+    val fechaSalida: Long? = null,
+    val precioNocheHabitacion: Double = 0.0,
+    val activo: Boolean = true,
+    val email: String = "",
+    val telefono: String = ""
 )

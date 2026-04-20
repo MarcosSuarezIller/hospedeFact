@@ -13,7 +13,13 @@ import com.example.hospedefact.data.models.OrdenCompra
 import java.text.SimpleDateFormat
 
 /**
- * Adaptador para órdenes de compra CON OPCIONES DE CAMBIAR ESTADO
+ * Adaptador para la lista de órdenes de compra que permite realizar acciones administrativas.
+ * Gestiona la visualización de datos básicos y proporciona callbacks para ver detalles,
+ * cambiar estados y procesar la recepción de mercancía.
+ *
+ * @property onDetallesClick Callback invocado al solicitar el desglose de la orden.
+ * @property onCambiarEstadoClick Callback invocado para modificar el flujo de trabajo de la orden.
+ * @property onRecibirClick Callback invocado para confirmar la entrada de productos al inventario.
  */
 class OrdenCompraAdapterConAcciones(
     private val onDetallesClick: (OrdenCompra) -> Unit,
@@ -21,6 +27,9 @@ class OrdenCompraAdapterConAcciones(
     private val onRecibirClick: (OrdenCompra) -> Unit
 ) : ListAdapter<OrdenCompra, OrdenCompraAdapterConAcciones.OrdenViewHolder>(DiffCallback()) {
 
+    /**
+     * ViewHolder que contiene y gestiona las vistas individuales de cada ítem de orden de compra.
+     */
     inner class OrdenViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val ordenId: TextView = itemView.findViewById(R.id.text_orden_id)
         private val proveedor: TextView = itemView.findViewById(R.id.text_proveedor_orden)
@@ -31,6 +40,12 @@ class OrdenCompraAdapterConAcciones(
         private val btnEstado: Button = itemView.findViewById(R.id.btn_cambiar_estado)
         private val btnRecibir: Button = itemView.findViewById(R.id.btn_recibir_orden)
 
+        /**
+         * Vincula los datos de una [OrdenCompra] con los elementos visuales del ítem.
+         * Configura colores dinámicos según el estado y la visibilidad de los botones de acción.
+         * 
+         * @param orden La orden de compra a mostrar.
+         */
         fun bind(orden: OrdenCompra) {
             ordenId.text = "Orden #${orden.id.take(8).uppercase()}"
             proveedor.text = "Proveedor: ${orden.proveedorNombre}"

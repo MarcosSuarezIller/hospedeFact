@@ -26,7 +26,9 @@ class PedidoViewModel(
     }
 
     /**
-     * Carga el menú completo
+     * Inicia la recuperación del catálogo completo de artículos del menú.
+     * 
+     * @return [LiveData] que emite la lista de [MenuItem] o estados de carga/error.
      */
     fun cargarMenu() = liveData(Dispatchers.IO) {
         try {
@@ -52,7 +54,10 @@ class PedidoViewModel(
     }
 
     /**
-     * Carga menú de una categoría específica
+     * Recupera los artículos del menú filtrados por una categoría específica (ej. "Bebidas", "Postres").
+     * 
+     * @param categoria Nombre de la categoría a filtrar.
+     * @return [LiveData] con la lista filtrada de artículos.
      */
     fun cargarMenuPorCategoria(categoria: String) = liveData(Dispatchers.IO) {
         try {
@@ -78,7 +83,12 @@ class PedidoViewModel(
     }
 
     /**
-     * Crea un nuevo pedido (después de que usuario confirma carrito)
+     * Procesa la creación de un nuevo pedido para un huésped específico.
+     * Calcula automáticamente el total del pedido basándose en los ítems proporcionados.
+     * 
+     * @param huespedId ID del huésped que realiza el pedido.
+     * @param items Lista de [ItemPedido] que componen el carrito de compras.
+     * @return [LiveData] con el resultado de la creación del pedido.
      */
     fun crearPedido(
         huespedId: String,
@@ -126,8 +136,14 @@ class PedidoViewModel(
 
 
     /**
-     * CREA PEDIDO Y DESCUENTA STOCK
-     * Integración con almacén
+     * Ejecuta una operación atómica para crear un pedido y descontar el stock de almacén.
+     * Valida la disponibilidad de cada producto antes de confirmar la transacción.
+     * Si algún producto no tiene stock suficiente, la operación se cancela.
+     * 
+     * @param huespedId ID del huésped.
+     * @param items Lista de productos solicitados.
+     * @param productoAlmacenRepository Repositorio para la gestión de inventario.
+     * @return [LiveData] indicando el éxito del pedido o el error específico por falta de stock.
      */
     fun crearPedidoConStockDescontado(
         huespedId: String,
@@ -198,7 +214,11 @@ class PedidoViewModel(
         }
     }
     /**
-     * Obtiene todos los pedidos pendientes de un huésped
+     * Recupera el historial de pedidos pendientes asociados a un huésped.
+     * Utilizado principalmente para procesos de facturación consolidada.
+     * 
+     * @param huespedId Identificador del huésped.
+     * @return [LiveData] con la lista de pedidos encontrados.
      */
     fun obtenerPedidosPorHuesped(huespedId: String) = liveData(Dispatchers.IO) {
         try {

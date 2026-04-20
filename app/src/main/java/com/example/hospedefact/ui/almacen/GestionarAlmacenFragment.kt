@@ -27,11 +27,14 @@ class GestionarAlmacenFragment : Fragment() {
     private lateinit var btnOrdenes: Button
     private lateinit var btnAlertas: Button
     private lateinit var btnReportes: Button
-    private lateinit var btnRecepcion: Button
+    //private lateinit var btnRecepcion: Button
 
     // Textos informativos
     private lateinit var textEstadisticas: TextView
 
+    /**
+     * Crea la vista del fragmento desde el diseño XML
+     */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,6 +43,9 @@ class GestionarAlmacenFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_gestionar_almacen, container, false)
     }
 
+    /**
+     * Inicializa los componentes de la interfaz y configura los eventos de navegación
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -52,7 +58,7 @@ class GestionarAlmacenFragment : Fragment() {
         btnOrdenes = view.findViewById(R.id.btn_ordenes)
         btnAlertas = view.findViewById(R.id.btn_alertas)
         btnReportes = view.findViewById(R.id.btn_reportes)
-        btnRecepcion = view.findViewById(R.id.btn_recepcion)
+        //btnRecepcion = view.findViewById(R.id.btn_recepcion)
         textEstadisticas = view.findViewById(R.id.text_estadisticas)
 
         // Botón atrás
@@ -79,10 +85,6 @@ class GestionarAlmacenFragment : Fragment() {
 
         btnReportes.setOnClickListener {
             Toast.makeText(context, "Reportes en desarrollo", Toast.LENGTH_SHORT).show()
-        }
-
-        btnRecepcion.setOnClickListener {
-            findNavController().navigate(R.id.action_almacen_to_recepcion)
         }
 
         // Cargar estadísticas

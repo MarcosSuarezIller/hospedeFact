@@ -21,7 +21,10 @@ class OrdenCompraRepository(
     }
 
     /**
-     * CREAR: Nueva orden de compra
+     * Registra una nueva orden de compra en la base de datos.
+     * 
+     * @param orden Objeto [OrdenCompra] con la información del proveedor e ítems a comprar.
+     * @return [Result] con el ID del documento generado en Firestore.
      */
     suspend fun crearOrdenCompra(orden: OrdenCompra): Result<String> = try {
         Log.d(TAG, "Creando orden de compra para: ${orden.proveedorNombre}")
@@ -39,7 +42,10 @@ class OrdenCompraRepository(
     }
 
     /**
-     * LEER: Obtener todas las órdenes pendientes
+     * Recupera todas las órdenes de compra que se encuentran en estado "pendiente".
+     * Las órdenes se devuelven ordenadas por fecha de forma descendente.
+     * 
+     * @return [Result] con la lista de órdenes de compra pendientes.
      */
     suspend fun obtenerOrdenesPendientes(): Result<List<OrdenCompra>> = try {
         Log.d(TAG, "Obteniendo órdenes pendientes")
@@ -62,7 +68,10 @@ class OrdenCompraRepository(
     }
 
     /**
-     * LEER: Obtener todas las órdenes
+     * Obtiene el listado completo de órdenes de compra registradas en el sistema.
+     * Ordenadas cronológicamente desde la más reciente.
+     * 
+     * @return [Result] con la lista histórica de órdenes de compra.
      */
     suspend fun obtenerTodasOrdenes(): Result<List<OrdenCompra>> = try {
         Log.d(TAG, "Obteniendo todas las órdenes de compra")
@@ -82,7 +91,10 @@ class OrdenCompraRepository(
     }
 
     /**
-     * LEER: Obtener orden por ID
+     * Busca una orden de compra específica mediante su identificador único.
+     * 
+     * @param ordenId ID único de la orden de compra.
+     * @return [Result] con el objeto [OrdenCompra] si se encuentra, o null.
      */
     suspend fun obtenerOrdenPorId(ordenId: String): Result<OrdenCompra?> = try {
         Log.d(TAG, "Obteniendo orden: $ordenId")
@@ -98,7 +110,11 @@ class OrdenCompraRepository(
     }
 
     /**
-     * ACTUALIZAR: Estado de orden (confirmada, entregada, etc)
+     * Actualiza el estado de una orden de compra (ej. "pendiente", "confirmada", "entregada").
+     * 
+     * @param ordenId ID de la orden a actualizar.
+     * @param nuevoEstado El nuevo estado que se asignará.
+     * @return [Result] que indica el éxito o fallo de la actualización.
      */
     suspend fun actualizarEstadoOrden(ordenId: String, nuevoEstado: String): Result<Unit> = try {
         Log.d(TAG, "Actualizando estado de orden: $ordenId -> $nuevoEstado")
@@ -114,8 +130,12 @@ class OrdenCompraRepository(
     }
 
     /**
-     * Cambia el estado de una orden de compra
-     * pendiente → confirmada → entregada
+     * Cambia el flujo de estado de una orden de compra.
+     * Típicamente sigue el flujo: pendiente -> confirmada -> entregada.
+     * 
+     * @param ordenId ID de la orden.
+     * @param nuevoEstado Estado al que se desea transicionar.
+     * @return [Result] que indica el resultado de la transición.
      */
     suspend fun cambiarEstadoOrden(ordenId: String, nuevoEstado: String): Result<Unit> = try {
         Log.d(TAG, "Cambiando estado de orden: $ordenId -> $nuevoEstado")
@@ -135,8 +155,12 @@ class OrdenCompraRepository(
     }
 
     /**
-     * CORE: Recibir mercancía (marcar orden como entregada)
-     * Automáticamente agrega stock a los productos
+     * Procesa la recepción física de los productos de una orden de compra.
+     * Cambia el estado de la orden a "entregada", registra la fecha de recepción
+     * y actualiza automáticamente el stock de cada producto en el almacén.
+     * 
+     * @param ordenId ID de la orden cuyos productos se están recibiendo.
+     * @return [Result] indicando el éxito del proceso de recepción y actualización de stock.
      */
     suspend fun recibirMercancia(ordenId: String): Result<Unit> = try {
         Log.d(TAG, "Recibiendo mercancía de orden: $ordenId")
@@ -183,7 +207,10 @@ class OrdenCompraRepository(
     }
 
     /**
-     * OBTENER: Órdenes de un proveedor específico
+     * Recupera todas las órdenes de compra asociadas a un proveedor en particular.
+     * 
+     * @param proveedorId ID único del proveedor.
+     * @return [Result] con la lista de órdenes de compra vinculadas a dicho proveedor.
      */
     suspend fun obtenerOrdenesPorProveedor(proveedorId: String): Result<List<OrdenCompra>> = try {
         Log.d(TAG, "Obteniendo órdenes del proveedor: $proveedorId")

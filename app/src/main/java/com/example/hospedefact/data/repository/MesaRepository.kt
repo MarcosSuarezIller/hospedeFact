@@ -16,6 +16,11 @@ class MesaRepository {
         private const val TAG = "MesaRepository"
     }
 
+    /**
+     * Obtiene la lista de todas las mesas marcadas como activas en el sistema.
+     * 
+     * @return [Result] con la lista de objetos [Mesa] ordenadas por número.
+     */
     suspend fun obtenerMesas(): Result<List<Mesa>> = try {
         Log.d(TAG, "Obteniendo mesas")
 
@@ -33,6 +38,12 @@ class MesaRepository {
         Result.failure(e)
     }
 
+    /**
+     * Obtiene los detalles de una mesa específica mediante su ID.
+     * 
+     * @param mesaId ID único de la mesa.
+     * @return [Result] con el objeto [Mesa] si existe, o null.
+     */
     suspend fun obtenerMesaPorId(mesaId: String): Result<Mesa?> = try {
         Log.d(TAG, "Obteniendo mesa: $mesaId")
 
@@ -46,6 +57,14 @@ class MesaRepository {
         Result.failure(e)
     }
 
+    /**
+     * Registra una nueva mesa en la base de datos.
+     * 
+     * @param numero Número identificador de la mesa.
+     * @param capacidad Cantidad de comensales.
+     * @param ubicacion Descripción de dónde se encuentra la mesa (ej. Terraza, Interior).
+     * @return [Result] con el ID de la nueva mesa creada.
+     */
     suspend fun crearMesa(numero: Int, capacidad: Int, ubicacion: String): Result<String> = try {
         Log.d(TAG, "Creando mesa: $numero")
 
@@ -67,6 +86,12 @@ class MesaRepository {
         Result.failure(e)
     }
 
+    /**
+     * Realiza una baja lógica de la mesa y registra el evento en el historial.
+     * 
+     * @param mesaId ID de la mesa a eliminar.
+     * @return [Result] indicando éxito o fallo de la operación.
+     */
     suspend fun eliminarMesa(mesaId: String): Result<Unit> = try {
         Log.d(TAG, "Eliminando mesa: $mesaId")
 
@@ -94,6 +119,14 @@ class MesaRepository {
         Result.failure(e)
     }
 
+    /**
+     * Cambia el estado de una mesa a "ocupada" y la vincula con un huésped y pedido.
+     * 
+     * @param mesaId ID de la mesa.
+     * @param huespedId ID del huésped que ocupa la mesa.
+     * @param pedidoId ID del pedido asociado a la mesa.
+     * @return [Result] indicando éxito o fallo.
+     */
     suspend fun ocuparMesa(mesaId: String, huespedId: String, pedidoId: String): Result<Unit> = try {
         Log.d(TAG, "Ocupando mesa: $mesaId para huesped: $huespedId")
 
@@ -126,6 +159,12 @@ class MesaRepository {
         Result.failure(e)
     }
 
+    /**
+     * Cambia el estado de una mesa a "disponible" y limpia las referencias a huéspedes o pedidos.
+     * 
+     * @param mesaId ID de la mesa a liberar.
+     * @return [Result] indicando éxito o fallo.
+     */
     suspend fun liberarMesa(mesaId: String): Result<Unit> = try {
         Log.d(TAG, "Liberando mesa: $mesaId")
 
@@ -158,6 +197,11 @@ class MesaRepository {
         Result.failure(e)
     }
 
+    /**
+     * Obtiene una lista de todas las mesas que están actualmente disponibles.
+     * 
+     * @return [Result] con la lista de mesas disponibles ordenadas.
+     */
     suspend fun obtenerMesasDisponibles(): Result<List<Mesa>> = try {
         Log.d(TAG, "Obteniendo mesas disponibles")
 
@@ -176,6 +220,11 @@ class MesaRepository {
         Result.failure(e)
     }
 
+    /**
+     * Obtiene una lista de todas las mesas que están actualmente ocupadas.
+     * 
+     * @return [Result] con la lista de mesas ocupadas ordenadas.
+     */
     suspend fun obtenerMesasOcupadas(): Result<List<Mesa>> = try {
         Log.d(TAG, "Obteniendo mesas ocupadas")
 
@@ -194,6 +243,14 @@ class MesaRepository {
         Result.failure(e)
     }
 
+    /**
+     * Registra una acción relacionada con una mesa en la colección de historial.
+     * 
+     * @param mesaId ID de la mesa.
+     * @param accion Descripción de la acción (ej. "ocupada", "liberada").
+     * @param huespedId ID opcional del huésped involucrado.
+     * @param notas Notas adicionales sobre el evento.
+     */
     private suspend fun registrarHistorial(
         mesaId: String,
         accion: String,

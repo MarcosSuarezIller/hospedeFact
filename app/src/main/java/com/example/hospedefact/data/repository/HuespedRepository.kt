@@ -22,24 +22,18 @@ class HuespedRepository {
     }
 
     /**
-     * CREAR: Inserta un nuevo huésped en Firestore
+     * Inserta un nuevo huésped en la colección de Firestore.
      *
-     * @param huesped Objeto Huesped a guardar
-     * @return Result.success(id) si funciona, Result.failure(exception) si falla
+     * @param huesped Objeto [Huesped] que contiene los datos personales y de habitación.
+     * @return [Result] con el ID del documento generado en Firestore.
      */
     suspend fun crearHuesped(huesped: Huesped): Result<String> = try {
-        Log.d(TAG, "Creando nuevo huesped: ${huesped.nombre}")
+        Log.d(TAG, "Creando huesped: ${huesped.nombre} con precio noche: ${huesped.precioNocheHabitacion}")
 
-        // Crea un documento con ID automático
         val doc = coleccion.document()
+        coleccion.document(doc.id).set(huesped.copy(id = doc.id)).await()
 
-        // Copia el huesped con el ID generado
-        val huespedConId = huesped.copy(id = doc.id)
-
-        // Guarda en Firestore
-        doc.set(huespedConId).await()
-
-        Log.d(TAG, "Huesped creado exitosamente. ID: ${doc.id}")
+        Log.d(TAG, "Huesped creado: ${doc.id}")
         Result.success(doc.id)
 
     } catch (e: Exception) {
@@ -48,9 +42,9 @@ class HuespedRepository {
     }
 
     /**
-     * LEER: Obtiene todos los huéspedes activos
+     * Recupera la lista de todos los huéspedes que se encuentran actualmente en estado "activo".
      *
-     * @return Result.success(lista) si funciona, Result.failure(exception) si falla
+     * @return [Result] que contiene la lista de objetos [Huesped] activos.
      */
     suspend fun obtenerHuespedes(): Result<List<Huesped>> = try {
         Log.d(TAG, "Obteniendo lista de huéspedes activos")
@@ -73,10 +67,10 @@ class HuespedRepository {
     }
 
     /**
-     * LEER: Obtiene un huésped específico por ID
+     * Busca un huésped específico utilizando su identificador único.
      *
-     * @param huespedId ID del huésped a obtener
-     * @return Result.success(huesped) si funciona, Result.failure(exception) si falla
+     * @param huespedId El ID del documento del huésped en Firestore.
+     * @return [Result] con el objeto [Huesped] encontrado o null si no existe.
      */
     suspend fun obtenerHuespedPorId(huespedId: String): Result<Huesped?> = try {
         Log.d(TAG, "Obteniendo huésped con ID: $huespedId")
@@ -101,10 +95,10 @@ class HuespedRepository {
     }
 
     /**
-     * ACTUALIZAR: Actualiza los datos de un huésped
+     * Actualiza la información de un huésped ya existente en la base de datos.
      *
-     * @param huesped Objeto Huesped con datos actualizados
-     * @return Result.success(Unit) si funciona, Result.failure(exception) si falla
+     * @param huesped Objeto [Huesped] con los campos actualizados (debe incluir el ID).
+     * @return [Result] que indica el éxito o fallo de la actualización.
      */
     suspend fun actualizarHuesped(huesped: Huesped): Result<Unit> = try {
         Log.d(TAG, "Actualizando huésped: ${huesped.id}")
@@ -121,11 +115,11 @@ class HuespedRepository {
     }
 
     /**
-     * ELIMINAR: Marca un huésped como "checkout" (baja lógica)
-     * No elimina físicamente, solo marca como inactivo
+     * Procesa la salida de un huésped, marcándolo con el estado "checkout" y registrando 
+     * la fecha actual como fecha de salida (baja lógica).
      *
-     * @param huespedId ID del huésped a "eliminar"
-     * @return Result.success(Unit) si funciona, Result.failure(exception) si falla
+     * @param huespedId ID único del huésped que realiza el checkout.
+     * @return [Result] indicando el éxito del proceso de salida.
      */
     suspend fun darDeAltaHuesped(huespedId: String): Result<Unit> = try {
         Log.d(TAG, "Marcando huésped como checkout: $huespedId")
@@ -160,8 +154,10 @@ class HuespedRepository {
     }
 
     /**
-     * Obtiene todos los huéspedes (incluyendo inactivos)
-     * Útil para reportes
+     * Obtiene una lista completa de todos los huéspedes registrados, independientemente de su estado.
+     * Útil para la generación de reportes históricos.
+     * 
+     * @return [Result] con la lista histórica de huéspedes.
      */
     suspend fun obtenerTodosHuespedes(): Result<List<Huesped>> = try {
         Log.d(TAG, "Obteniendo TODOS los huéspedes")
@@ -175,6 +171,41 @@ class HuespedRepository {
     } catch (e: Exception) {
         Log.e(TAG, "Error al obtener todos los huéspedes", e)
         Result.failure(e)
+    }
+    /**
+     * Obtiene la información de un huésped junto con los detalles específicos de precio de su habitación.
+     * 
+     * @param huespedId ID del huésped.
+     * @return [Result] que contiene un Par con el objeto [Huesped] y el precio por noche.
+     */
+    suspend fun obtenerHuespedConDetalles(huespedId: String): Result<Pair<Huesped?, Double>> = try {
+        Log.d(TAG, "Obteniendo huesped con detalles: $huespedId")
+
+        val snapshot = coleccion.document(huespedId).get().await()
+        val huesped = snapshot.toObject(Huesped::class.java)
+
+        val precioNoche = huesped?.precioNocheHabitacion ?: 0.0
+
+        Result.success(Pair(huesped, precioNoche))
+
+    } catch (e: Exception) {
+        Log.e(TAG, "Error al obtener huesped", e)
+        Result.failure(e)
+    }
+
+    /**
+     * Realiza el cálculo del costo total de estancia basándose en las fechas de entrada y salida.
+     * Asegura un mínimo de una noche cargada.
+     * 
+     * @param huespedId ID del huésped.
+     * @param fechaEntrada Marca de tiempo (ms) de la entrada.
+     * @param fechaSalida Marca de tiempo (ms) de la salida.
+     * @param precioNoche Costo por noche de la habitación.
+     * @return El importe total calculado para la estancia.
+     */
+    fun calcularCostoEstancia(huespedId: String, fechaEntrada: Long, fechaSalida: Long, precioNoche: Double): Double {
+        val diasEstancia = ((fechaSalida - fechaEntrada) / (1000 * 60 * 60 * 24)).toInt()
+        return diasEstancia.coerceAtLeast(1) * precioNoche
     }
 }
 

@@ -13,18 +13,30 @@ import com.example.hospedefact.R
 import com.example.hospedefact.data.models.Mesa
 
 /**
- * Adaptador en forma de grid para visualizar mesas
+ * Adaptador para un RecyclerView en formato de rejilla (Grid) que visualiza el estado de las mesas.
+ * Permite mostrar de forma gráfica la disponibilidad y ocupación de las mesas del restaurante.
+ * 
+ * @property onMesaClick Callback invocado cuando el usuario selecciona una mesa de la rejilla.
  */
 class MesaGridAdapter(
     private val onMesaClick: (Mesa) -> Unit
 ) : ListAdapter<Mesa, MesaGridAdapter.MesaViewHolder>(DiffCallback()) {
 
+    /**
+     * ViewHolder que gestiona la representación visual de una mesa individual en la rejilla.
+     */
     inner class MesaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val numero: TextView = itemView.findViewById(R.id.text_numero_mesa)
         private val capacidad: TextView = itemView.findViewById(R.id.text_capacidad_mesa)
         private val estado: TextView = itemView.findViewById(R.id.text_estado_mesa_grid)
         private val container: LinearLayout = itemView.findViewById(R.id.container_mesa)
 
+        /**
+         * Vincula los datos de una [Mesa] con los elementos visuales del ítem.
+         * Aplica colores dinámicos al texto del estado y al fondo del contenedor según la disponibilidad.
+         * 
+         * @param mesa El objeto mesa con la información de estado y capacidad.
+         */
         fun bind(mesa: Mesa) {
             numero.text = "Mesa ${mesa.numero}"
             capacidad.text = "Cap: ${mesa.capacidad}"
@@ -57,6 +69,10 @@ class MesaGridAdapter(
         holder.bind(getItem(position))
     }
 
+    /**
+     * Implementación de [DiffUtil.ItemCallback] para optimizar la actualización de la rejilla de mesas
+     * mediante la comparación de identificadores únicos y contenido.
+     */
     class DiffCallback : DiffUtil.ItemCallback<Mesa>() {
         override fun areItemsTheSame(oldItem: Mesa, newItem: Mesa) =
             oldItem.id == newItem.id

@@ -24,12 +24,14 @@ class FacturaRepository(
     }
 
     /**
-     * GENERADOR DE FACTURAS - EL ALGORITMO PRINCIPAL
+     * Algoritmo principal para la generación de facturas.
+     * Consolida todos los pedidos pendientes de un huésped en una única factura,
+     * calculando automáticamente el subtotal, el IVA y el importe total.
+     * Al finalizar, marca todos los pedidos procesados como "facturados".
      *
-     * Obtiene todos los pedidos pendientes de un huésped
-     * Los consolida en UNA sola factura
-     * Calcula automáticamente IVA y total
-     * Marca los pedidos como facturados
+     * @param huespedId ID del huésped para el cual se genera la factura.
+     * @param usuarioId ID del usuario (empleado/admin) que emite la factura.
+     * @return [Result] con el objeto [Factura] generado y guardado en Firestore.
      */
     suspend fun generarFactura(huespedId: String, usuarioId: String): Result<Factura> = try {
         Log.d(TAG, "Generando factura para huésped: $huespedId")
@@ -130,7 +132,10 @@ class FacturaRepository(
     }
 
     /**
-     * Obtiene una factura específica por ID
+     * Recupera una factura específica de la base de datos utilizando su identificador único.
+     * 
+     * @param facturaId El ID de la factura a buscar.
+     * @return [Result] que contiene el objeto [Factura] si se encuentra, o null.
      */
     suspend fun obtenerFacturaPorId(facturaId: String): Result<Factura?> = try {
         Log.d(TAG, "Obteniendo factura: $facturaId")
@@ -147,7 +152,10 @@ class FacturaRepository(
     }
 
     /**
-     * Obtiene todas las facturas de un huésped
+     * Recupera el historial completo de facturas emitidas para un huésped específico.
+     * 
+     * @param huespedId ID único del huésped.
+     * @return [Result] con la lista de facturas asociadas a dicho huésped.
      */
     suspend fun obtenerFacturasPorHuesped(huespedId: String): Result<List<Factura>> = try {
         Log.d(TAG, "Obteniendo facturas del huésped: $huespedId")
@@ -167,7 +175,9 @@ class FacturaRepository(
     }
 
     /**
-     * Obtiene todas las facturas emitidas
+     * Obtiene una lista global con todas las facturas registradas en el sistema.
+     * 
+     * @return [Result] con la colección completa de objetos [Factura].
      */
     suspend fun obtenerTodasLasFacturas(): Result<List<Factura>> = try {
         Log.d(TAG, "Obteniendo todas las facturas")
@@ -184,7 +194,10 @@ class FacturaRepository(
     }
 
     /**
-     * Actualiza el estado de una factura (ej: de emitida a pagada)
+     * Actualiza la información de una factura existente.
+     * 
+     * @param factura Objeto [Factura] con los datos modificados.
+     * @return [Result] indicando el resultado de la operación en Firestore.
      */
     suspend fun actualizarFactura(factura: Factura): Result<Unit> = try {
         Log.d(TAG, "Actualizando factura: ${factura.id}")
@@ -200,7 +213,10 @@ class FacturaRepository(
     }
 
     /**
-     * Marca una factura como pagada
+     * Cambia el estado de una factura a "pagada" de forma directa.
+     * 
+     * @param facturaId ID único de la factura a actualizar.
+     * @return [Result] indicando éxito o el error ocurrido durante el proceso.
      */
     suspend fun marcarComoPagada(facturaId: String): Result<Unit> = try {
         Log.d(TAG, "Marcando factura como pagada: $facturaId")
@@ -224,6 +240,82 @@ class FacturaRepository(
 
     } catch (e: Exception) {
         Log.e(TAG, "Error al marcar como pagada", e)
+        Result.failure(e)
+    }
+
+    /**
+     * Genera una factura integral que incluye tanto los cargos por consumo de restaurante 
+     * como el importe por los días de estancia en la habitación.
+     *
+     * @param huespedId ID del huésped.
+     * @param nombreHuesped Nombre completo del huésped para el encabezado de factura.
+     * @param precioNoche Precio diario de la habitación ocupada.
+     * @param diasEstancia Número de noches de estancia.
+     * @param pedidos Lista de pedidos del restaurante a incluir en la factura.
+     * @return [Result] con el ID de la nueva factura generada.
+     */
+    suspend fun generarFacturaConEstancia(
+        huespedId: String,
+        nombreHuesped: String,
+        precioNoche: Double,
+        diasEstancia: Int,
+        pedidos: List<Pedido>
+    ): Result<String> = try {
+        Log.d(TAG, "Generando factura con estancia")
+
+        val costoEstancia = diasEstancia * precioNoche
+
+        val itemsEstancia = listOf(
+            LineaFactura(
+                descripcion = "Estancia ${diasEstancia} noche(s)",
+                cantidad = diasEstancia,
+                precioUnitario = precioNoche,
+                subtotal = costoEstancia
+            )
+        )
+
+        val subtotalPedidos = pedidos.sumOf { it.total } / 1.21
+        val subtotal = subtotalPedidos + costoEstancia
+        val iva = subtotal * IVA
+        val total = subtotal + iva
+
+        val lineas = mutableListOf<LineaFactura>()
+
+        for (pedido in pedidos) {
+            lineas.addAll(pedido.items.map { item ->
+                LineaFactura(
+                    descripcion = item.nombre,
+                    cantidad = item.cantidad,
+                    precioUnitario = item.precioUnitario,
+                    subtotal = item.cantidad * item.precioUnitario
+                )
+            })
+        }
+
+        lineas.addAll(itemsEstancia)
+
+        val factura = Factura(
+            huespedId = huespedId,
+            nombreHuesped = nombreHuesped,
+            items = lineas,
+            subtotal = subtotal,
+            iva = iva,
+            total = total,
+            estado = "emitida",
+            incluyelEstancia = true,
+            diasEstancia = diasEstancia,
+            costoEstancia = costoEstancia
+        )
+
+        val doc = coleccion.document()
+        coleccion.document(doc.id).set(factura.copy(id = doc.id)).await()
+
+        Log.d(TAG, "Factura con estancia generada")
+
+        Result.success(doc.id)
+
+    } catch (e: Exception) {
+        Log.e(TAG, "Error", e)
         Result.failure(e)
     }
 }

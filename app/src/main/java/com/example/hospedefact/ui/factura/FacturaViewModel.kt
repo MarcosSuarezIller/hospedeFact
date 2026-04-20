@@ -23,13 +23,12 @@ class FacturaViewModel(
     }
 
     /**
-     * GENERA FACTURA CONSOLIDADA
+     * Inicia el proceso de generación de una factura consolidada para un huésped.
+     * Consolida todos los pedidos pendientes en un único documento legal.
+     * Requiere que el usuario esté autenticado para registrar quién emite la factura.
      *
-     * Este es el MÉTODO PRINCIPAL del proyecto
-     * Consolida todos los pedidos pendientes en UNA factura
-     *
-     * @param huespedId ID del huésped
-     * @return LiveData que emite la factura generada
+     * @param huespedId Identificador único del huésped.
+     * @return [LiveData] que emite el objeto [Factura] generado o un mensaje de error.
      */
     fun generarFactura(huespedId: String) = liveData(Dispatchers.IO) {
         try {
@@ -66,7 +65,10 @@ class FacturaViewModel(
     }
 
     /**
-     * Obtiene una factura para visualizarla
+     * Recupera los detalles de una factura específica para su visualización.
+     * 
+     * @param facturaId ID único de la factura a recuperar.
+     * @return [LiveData] con el objeto [Factura] o estado de error.
      */
     fun obtenerFactura(facturaId: String) = liveData(Dispatchers.IO) {
         try {
@@ -92,7 +94,10 @@ class FacturaViewModel(
     }
 
     /**
-     * Obtiene todas las facturas de un huésped
+     * Obtiene el listado completo de facturas emitidas a nombre de un huésped particular.
+     * 
+     * @param huespedId ID del huésped.
+     * @return [LiveData] con la lista de facturas encontradas.
      */
     fun obtenerFacturasPorHuesped(huespedId: String) = liveData(Dispatchers.IO) {
         try {
@@ -118,7 +123,10 @@ class FacturaViewModel(
     }
 
     /**
-     * Marca una factura como pagada
+     * Cambia el estado administrativo de una factura a "pagada".
+     * 
+     * @param facturaId ID de la factura a actualizar.
+     * @return [LiveData] con el resultado del cambio de estado.
      */
     fun marcarComoPagada(facturaId: String) = liveData(Dispatchers.IO) {
         try {

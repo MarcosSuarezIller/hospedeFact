@@ -34,40 +34,102 @@
             android:textColor="#2196F3" />
     </LinearLayout>
 
-    <!-- Spinner de Huéspedes -->
+<!--    &lt;!&ndash; Spinner de Huéspedes &ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="👤 Selecciona huésped:"-->
+<!--        android:textSize="14sp"-->
+<!--        android:textColor="#757575"-->
+<!--        android:layout_marginBottom="4dp" />-->
+
+<!--    &lt;!&ndash; Spinner huesped &ndash;&gt;-->
+<!--    <Spinner-->
+<!--        android:id="@+id/spinner_huesped"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:background="@drawable/edit_text_bg" />-->
+
+<!--    &lt;!&ndash; Spinner Mesa &ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Mesa (Restauracion)"-->
+<!--        android:textSize="13sp"-->
+<!--        android:textColor="#757575"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:layout_marginBottom="4dp" />-->
+
+<!--    <Spinner-->
+<!--        android:id="@+id/spinner_mesa"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:background="@drawable/edit_text_bg"-->
+<!--        android:layout_marginBottom="12dp" />-->
+    <!-- Tipo de Pedido -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="👤 Selecciona huésped:"
-        android:textSize="14sp"
-        android:textColor="#757575"
-        android:layout_marginBottom="4dp" />
-
-    <!-- Spinner huesped -->
-    <Spinner
-        android:id="@+id/spinner_huesped"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/edit_text_bg" />
-
-    <!-- Spinner Mesa -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Mesa (Restauracion)"
+        android:text="Tipo de Pedido"
         android:textSize="13sp"
         android:textColor="#757575"
-        android:layout_marginTop="12dp"
         android:layout_marginBottom="4dp" />
 
     <Spinner
-        android:id="@+id/spinner_mesa"
+        android:id="@+id/spinner_tipo_pedido"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@drawable/edit_text_bg"
         android:layout_marginBottom="12dp" />
 
+    <!-- Container Huesped -->
+    <LinearLayout
+        android:id="@+id/container_huesped"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Huesped"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <Spinner
+            android:id="@+id/spinner_huesped"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/edit_text_bg" />
+    </LinearLayout>
+
+    <!-- Container Mesa -->
+    <LinearLayout
+        android:id="@+id/container_mesa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mesa"
+            android:textSize="13sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="4dp" />
+
+        <Spinner
+            android:id="@+id/spinner_mesa"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/edit_text_bg" />
+    </LinearLayout>
     <!-- Sección Menú -->
     <TextView
         android:layout_width="match_parent"

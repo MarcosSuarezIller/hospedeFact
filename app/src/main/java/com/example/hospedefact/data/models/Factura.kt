@@ -14,7 +14,12 @@ data class Factura(
     val iva: Double = 0.0,                          // IVA (21%)
     val total: Double = 0.0,                        // Total con IVA
     val generadaPor: String = "",                   // UID del usuario que la generó
-    val estado: String = "emitida"                  // "emitida", "pagada"
+    val estado: String = "emitida",                  // "emitida", "pagada"
+    val nombreHuesped: String = "",
+    val fecha: Long = System.currentTimeMillis(),
+    val incluyelEstancia: Boolean = false,
+    val diasEstancia: Int = 0,
+    val costoEstancia: Double = 0.0
 )
 
 /**

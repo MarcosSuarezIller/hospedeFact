@@ -19,7 +19,18 @@ class ProveedorViewModel(
     }
 
     /**
-     * Crea nuevo proveedor
+     * Crea un nuevo proveedor en el sistema tras validar los campos obligatorios.
+     * 
+     * @param nombre Nombre de la empresa o proveedor.
+     * @param contacto Nombre de la persona de contacto.
+     * @param email Correo electrónico principal.
+     * @param telefono Número de teléfono de contacto.
+     * @param direccion Dirección física.
+     * @param ciudad Ciudad de ubicación.
+     * @param pais País del proveedor.
+     * @param codigoPostal Código postal.
+     * @param tiempoEntrega Tiempo estimado de entrega en días.
+     * @return [LiveData] que emite el estado del proceso ("exito", "cargando" o "error:").
      */
     fun crearProveedor(
         nombre: String,
@@ -72,7 +83,9 @@ class ProveedorViewModel(
     }
 
     /**
-     * Carga todos los proveedores
+     * Inicia la recuperación de la lista completa de proveedores activos.
+     * 
+     * @return [LiveData] que emite la lista de [Proveedor] o estados de carga/error.
      */
     fun cargarProveedores() = liveData(Dispatchers.IO) {
         try {
@@ -98,7 +111,10 @@ class ProveedorViewModel(
     }
 
     /**
-     * Actualiza datos de proveedor
+     * Actualiza la información de un proveedor existente mediante el repositorio.
+     * 
+     * @param proveedor Objeto [Proveedor] con los datos actualizados.
+     * @return [LiveData] con el resultado de la operación.
      */
     fun actualizarProveedor(proveedor: Proveedor) = liveData(Dispatchers.IO) {
         try {
@@ -124,7 +140,10 @@ class ProveedorViewModel(
     }
 
     /**
-     * Desactiva un proveedor
+     * Procesa la baja lógica de un proveedor en el sistema.
+     * 
+     * @param proveedorId ID único del proveedor a desactivar.
+     * @return [LiveData] con el resultado de la desactivación.
      */
     fun desactivarProveedor(proveedorId: String) = liveData(Dispatchers.IO) {
         try {

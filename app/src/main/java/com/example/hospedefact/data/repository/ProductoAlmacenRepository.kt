@@ -23,7 +23,10 @@ class ProductoAlmacenRepository {
     }
 
     /**
-     * CREAR: Nuevo producto en almacén
+     * Registra un nuevo producto en el catálogo del almacén.
+     * 
+     * @param producto Objeto [ProductoAlmacen] con la información del artículo y límites de stock.
+     * @return [Result] con el ID del documento creado en Firestore.
      */
     suspend fun crearProductoAlmacen(producto: ProductoAlmacen): Result<String> = try {
         Log.d(TAG, "Creando producto: ${producto.nombre}")
@@ -41,7 +44,9 @@ class ProductoAlmacenRepository {
     }
 
     /**
-     * LEER: Obtener todos los productos
+     * Recupera todos los productos del almacén que se encuentran en estado activo.
+     * 
+     * @return [Result] con la lista completa de productos disponibles.
      */
     suspend fun obtenerProductos(): Result<List<ProductoAlmacen>> = try {
         Log.d(TAG, "Obteniendo productos del almacén")
@@ -61,7 +66,10 @@ class ProductoAlmacenRepository {
     }
 
     /**
-     * LEER: Obtener producto por ID
+     * Busca un producto específico en el almacén mediante su identificador único.
+     * 
+     * @param productoId ID único del producto.
+     * @return [Result] con el objeto [ProductoAlmacen] si existe, o null.
      */
     suspend fun obtenerProductoPorId(productoId: String): Result<ProductoAlmacen?> = try {
         Log.d(TAG, "Obteniendo producto: $productoId")
@@ -77,7 +85,10 @@ class ProductoAlmacenRepository {
     }
 
     /**
-     * ACTUALIZAR: Actualizar datos de producto
+     * Actualiza la información técnica o de inventario de un producto existente.
+     * 
+     * @param producto Objeto [ProductoAlmacen] con los datos actualizados.
+     * @return [Result] indicando el éxito o fallo de la actualización.
      */
     suspend fun actualizarProducto(producto: ProductoAlmacen): Result<Unit> = try {
         Log.d(TAG, "Actualizando producto: ${producto.id}")
@@ -93,8 +104,14 @@ class ProductoAlmacenRepository {
     }
 
     /**
-     * CORE: Descontar stock cuando se crea un pedido
-     * Valida que hay suficiente stock antes de descontar
+     * Disminuye la cantidad de stock disponible de un producto.
+     * Verifica que exista stock suficiente antes de proceder y registra el movimiento 
+     * en el historial para auditoría.
+     * 
+     * @param productoId ID del producto a descontar.
+     * @param cantidad Unidades a retirar del almacén.
+     * @param referencia Código o descripción de referencia (ej. ID del pedido).
+     * @return [Result] indicando el éxito de la operación o error por stock insuficiente.
      */
     suspend fun descontarStock(
         productoId: String,
@@ -151,8 +168,13 @@ class ProductoAlmacenRepository {
     }
 
     /**
-     * CORE: Agregar stock (recepción de compra)
-     * Cuando llega mercancía del proveedor
+     * Incrementa el stock de un producto, usualmente tras la recepción de una compra a proveedor.
+     * Registra el movimiento en el historial y lanza una advertencia si se supera el stock máximo definido.
+     * 
+     * @param productoId ID del producto a incrementar.
+     * @param cantidad Unidades a añadir al almacén.
+     * @param referencia Código de referencia (ej. ID de la orden de compra).
+     * @return [Result] indicando el éxito de la operación.
      */
     suspend fun agregarStock(
         productoId: String,
@@ -207,8 +229,17 @@ class ProductoAlmacenRepository {
     }
 
     /**
-     * REGISTRAR MOVIMIENTO: Crea registro de cada cambio de stock
-     * Para auditoría completa
+     * Registra de forma persistente cualquier cambio en el inventario en la colección de movimientos.
+     * Permite mantener una trazabilidad completa de entradas y salidas.
+     * 
+     * @param productoId ID del producto.
+     * @param productoNombre Nombre del producto en el momento del movimiento.
+     * @param tipo Tipo de movimiento ("entrada" o "salida").
+     * @param cantidad Cantidad involucrada.
+     * @param stockAnterior Cantidad de stock antes de la operación.
+     * @param stockNuevo Cantidad de stock resultante.
+     * @param referencia Documento o ID de referencia.
+     * @param razon Motivo del movimiento (Venta, Compra, Ajuste, etc.).
      */
     private suspend fun registrarMovimiento(
         productoId: String,
@@ -245,7 +276,9 @@ class ProductoAlmacenRepository {
     }
 
     /**
-     * OBTENER ALERTAS: Productos con stock bajo
+     * Filtra y devuelve la lista de productos cuyo stock actual es inferior al stock mínimo de seguridad.
+     * 
+     * @return [Result] con la lista de productos que requieren reposición.
      */
     suspend fun obtenerProductosConStockBajo(): Result<List<ProductoAlmacen>> = try {
         Log.d(TAG, "Obteniendo productos con stock bajo")
@@ -267,7 +300,10 @@ class ProductoAlmacenRepository {
     }
 
     /**
-     * OBTENER HISTORIAL: Movimientos de un producto
+     * Recupera el historial cronológico de movimientos (entradas/salidas) de un producto específico.
+     * 
+     * @param productoId ID único del producto.
+     * @return [Result] con la lista de movimientos ordenada por fecha (más reciente primero).
      */
     suspend fun obtenerMovimientosProducto(productoId: String): Result<List<MovimientoStock>> = try {
         Log.d(TAG, "Obteniendo movimientos del producto: $productoId")
@@ -288,7 +324,10 @@ class ProductoAlmacenRepository {
     }
 
     /**
-     * OBTENER VALOR TOTAL DEL INVENTARIO
+     * Calcula el valor monetario total de todas las existencias actuales en el almacén 
+     * basándose en el precio de compra.
+     * 
+     * @return [Result] con el valor total acumulado del inventario.
      */
     suspend fun obtenerValorTotalInventario(): Result<Double> = try {
         Log.d(TAG, "Calculando valor total del inventario")

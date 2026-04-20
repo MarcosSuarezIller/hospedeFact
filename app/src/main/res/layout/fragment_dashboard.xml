@@ -50,6 +50,17 @@
         android:background="@color/button_color"
         android:textColor="#FFFFFF" />
 
+    <!-- Botón Habitaciones -->
+    <Button
+        android:id="@+id/btn_habitaciones"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="Habitaciones"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/button_color"
+        android:textColor="#FFFFFF" />
+
     <!-- Botón Almacén -->
     <Button
         android:id="@+id/btn_almacen"

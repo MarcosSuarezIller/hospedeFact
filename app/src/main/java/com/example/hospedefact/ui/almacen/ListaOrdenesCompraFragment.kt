@@ -307,7 +307,8 @@ class ListaOrdenesCompraFragment : Fragment() {
     }
 
     /**
-     * Carga todas las órdenes
+     * Solicita al ViewModel todas las órdenes de compra registradas y gestiona la visibilidad
+     * de la barra de progreso y el mensaje de lista vacía.
      */
     private fun cargarOrdenes() {
         viewModel.obtenerTodasOrdenes().observe(viewLifecycleOwner) { resultado ->
@@ -348,7 +349,10 @@ class ListaOrdenesCompraFragment : Fragment() {
     }
 
     /**
-     * Muestra diálogo con detalles de la orden
+     * Infla y muestra un cuadro de diálogo personalizado con el desglose detallado
+     * de los productos, cantidades y totales de una orden de compra específica.
+     * 
+     * @param orden El objeto [OrdenCompra] a detallar.
      */
     private fun mostrarDetallesOrden(orden: OrdenCompra) {
         val inflater = LayoutInflater.from(context)
@@ -394,7 +398,10 @@ class ListaOrdenesCompraFragment : Fragment() {
     }
 
     /**
-     * Muestra opciones para cambiar el estado de la orden
+     * Presenta un menú contextual con las transiciones de estado permitidas
+     * según el estado actual de la orden de compra seleccionada.
+     * 
+     * @param orden La orden de compra cuyo estado se desea modificar.
      */
     private fun mostrarOpcionesEstado(orden: OrdenCompra) {
         val opciones = mutableListOf<String>()
@@ -449,7 +456,11 @@ class ListaOrdenesCompraFragment : Fragment() {
     }
 
     /**
-     * Cambia el estado de una orden
+     * Ejecuta la solicitud de cambio de estado a través del ViewModel y notifica
+     * al usuario sobre el resultado de la operación.
+     * 
+     * @param orden La orden de compra a modificar.
+     * @param nuevoEstado El identificador del nuevo estado (ej. "confirmada", "cancelada").
      */
     private fun cambiarEstado(orden: OrdenCompra, nuevoEstado: String) {
         viewModel.cambiarEstadoOrden(orden.id, nuevoEstado)

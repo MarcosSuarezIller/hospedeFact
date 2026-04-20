@@ -18,9 +18,9 @@ import com.example.hospedefact.ui.huespedes.HuespedViewModel
 import com.example.hospedefact.ui.pedidos.PedidoViewModel
 
 /**
- * GenerarFacturaFragment
- * Permite generar factura consolidada de un huésped
- * EL CORAZÓN DEL PROYECTO
+ * Fragmento encargado de orquestar la generación de facturas consolidadas.
+ * Permite seleccionar un huésped, visualizar el desglose de sus consumos pendientes (pedidos)
+ * y disparar el proceso de facturación legal que unifica todos los cargos.
  */
 class GenerarFacturaFragment : Fragment() {
 
@@ -86,7 +86,8 @@ class GenerarFacturaFragment : Fragment() {
     }
 
     /**
-     * Carga lista de huéspedes para el spinner
+     * Recupera y carga la lista de huéspedes desde el ViewModel para poblar el selector.
+     * Al seleccionar un huésped, se desencadena automáticamente la búsqueda de sus pedidos pendientes.
      */
     private fun cargarHuespedes() {
         huespedViewModel.cargarHuespedes().observe(viewLifecycleOwner) { resultado ->
@@ -124,8 +125,10 @@ class GenerarFacturaFragment : Fragment() {
     }
 
     /**
-     * Carga los pedidos pendientes de un huésped
-     * para mostrar el resumen
+     * Consulta al repositorio de pedidos aquellos registros que aún no han sido facturados
+     * para el huésped seleccionado.
+     * 
+     * @param huespedId Identificador único del huésped.
      */
     private fun cargarPedidosPendientes(huespedId: String) {
         pedidoViewModel.obtenerPedidosPorHuesped(huespedId).observe(viewLifecycleOwner) { resultado ->
@@ -145,7 +148,8 @@ class GenerarFacturaFragment : Fragment() {
     }
 
     /**
-     * Muestra resumen de pedidos antes de generar factura
+     * Construye y muestra una representación textual detallada de todos los pedidos pendientes.
+     * Incluye desglose de ítems, cantidades, subtotales por pedido y el cálculo final de impuestos.
      */
     private fun mostrarResumen() {
         textSinPedidos.visibility = View.GONE
@@ -183,7 +187,7 @@ class GenerarFacturaFragment : Fragment() {
     }
 
     /**
-     * Muestra mensaje cuando no hay pedidos pendientes
+     * Gestiona la visibilidad de la UI cuando no existen consumos pendientes de facturar.
      */
     private fun mostrarSinPedidos() {
         textResumen.visibility = View.GONE
@@ -193,8 +197,9 @@ class GenerarFacturaFragment : Fragment() {
     }
 
     /**
-     * GENERA LA FACTURA
-     * Este es el método principal que dispara la consolidación
+     * Ejecuta el proceso de consolidación de facturación.
+     * Transforma todos los pedidos individuales en un único documento de [Factura]
+     * y actualiza el estado de los mismos para evitar duplicidades.
      */
     private fun generarFactura() {
         val huesped = huespedSeleccionado ?: return

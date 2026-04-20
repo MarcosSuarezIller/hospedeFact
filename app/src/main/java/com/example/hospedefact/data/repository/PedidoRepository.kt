@@ -20,7 +20,10 @@ class PedidoRepository {
     }
 
     /**
-     * Crea un nuevo pedido en Firestore
+     * Registra un nuevo pedido en la colección de Firestore.
+     * 
+     * @param pedido El objeto [Pedido] con la información del huésped e items.
+     * @return [Result] con el ID del documento creado o error.
      */
     suspend fun crearPedido(pedido: Pedido): Result<String> = try {
         Log.d(TAG, "Creando pedido para huésped: ${pedido.huespedId}")
@@ -38,7 +41,10 @@ class PedidoRepository {
     }
 
     /**
-     * Obtiene todos los pedidos pendientes de un huésped
+     * Recupera todos los pedidos que se encuentran en estado "pendiente" para un huésped específico.
+     * 
+     * @param huespedId El ID único del huésped.
+     * @return [Result] que contiene la lista de pedidos pendientes encontrados.
      */
     suspend fun obtenerPedidosPorHuesped(huespedId: String): Result<List<Pedido>> = try {
         Log.d(TAG, "Obteniendo pedidos pendientes del huésped: $huespedId")
@@ -59,7 +65,10 @@ class PedidoRepository {
     }
 
     /**
-     * Obtiene un pedido específico por ID
+     * Recupera un pedido específico utilizando su identificador único.
+     * 
+     * @param pedidoId El ID del pedido a buscar.
+     * @return [Result] con el objeto [Pedido] si se encontró, o null en caso contrario.
      */
     suspend fun obtenerPedidoPorId(pedidoId: String): Result<Pedido?> = try {
         Log.d(TAG, "Obteniendo pedido: $pedidoId")
@@ -76,7 +85,11 @@ class PedidoRepository {
     }
 
     /**
-     * Actualiza un pedido (ej: cambiar estado a facturado)
+     * Sobrescribe un pedido existente con nueva información.
+     * Útil para cambiar estados (ej. de pendiente a facturado) o modificar productos.
+     * 
+     * @param pedido El objeto [Pedido] actualizado.
+     * @return [Result] que indica el éxito o fallo de la operación.
      */
     suspend fun actualizarPedido(pedido: Pedido): Result<Unit> = try {
         Log.d(TAG, "Actualizando pedido: ${pedido.id}")
@@ -92,8 +105,9 @@ class PedidoRepository {
     }
 
     /**
-     * Obtiene todos los pedidos (incluyendo facturados)
-     * Útil para reportes
+     * Obtiene la totalidad de pedidos registrados en el sistema, sin filtros de estado.
+     * 
+     * @return [Result] que contiene la lista completa de pedidos.
      */
     suspend fun obtenerTodosPedidos(): Result<List<Pedido>> = try {
         Log.d(TAG, "Obteniendo todos los pedidos")
@@ -110,7 +124,10 @@ class PedidoRepository {
     }
 
     /**
-     * Obtiene pedidos facturados de un huésped
+     * Recupera todos los pedidos que ya han sido procesados y facturados para un huésped.
+     * 
+     * @param huespedId El ID único del huésped.
+     * @return [Result] con la lista de pedidos facturados encontrados.
      */
     suspend fun obtenerPedidosFacturados(huespedId: String): Result<List<Pedido>> = try {
         Log.d(TAG, "Obteniendo pedidos facturados del huésped: $huespedId")

@@ -16,6 +16,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hospedefact.R
 import com.example.hospedefact.data.models.Mesa
 
+/**
+ * Fragmento encargado de la administración y configuración de las mesas del restaurante.
+ * Permite al administrador visualizar el listado completo, añadir nuevas mesas con su
+ * respectiva capacidad y ubicación, así como eliminar mesas existentes.
+ */
 class AdminMesasFragment : Fragment() {
 
     private lateinit var viewModel: MesaViewModel
@@ -31,6 +36,9 @@ class AdminMesasFragment : Fragment() {
     private lateinit var textVacio: TextView
     private lateinit var textTotal: TextView
 
+    /**
+     * Infla el diseño XML correspondiente a la administración de mesas.
+     */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,6 +47,10 @@ class AdminMesasFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_admin_mesas, container, false)
     }
 
+    /**
+     * Inicializa las referencias a los componentes de la interfaz, configura el adaptador
+     * del RecyclerView y establece los listeners para los botones de acción.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -72,6 +84,10 @@ class AdminMesasFragment : Fragment() {
         cargarMesas()
     }
 
+    /**
+     * Recupera el listado completo de mesas desde el ViewModel, gestionando la visualización
+     * de estados de carga, lista vacía y errores de red o base de datos.
+     */
     private fun cargarMesas() {
         viewModel.cargarMesas().observe(viewLifecycleOwner) { resultado ->
             when (resultado) {
@@ -110,6 +126,10 @@ class AdminMesasFragment : Fragment() {
         }
     }
 
+    /**
+     * Valida los datos introducidos en los campos de texto y solicita la creación
+     * de una nueva mesa a través del ViewModel.
+     */
     private fun agregarMesa() {
         val numero = inputNumeroMesa.text.toString().toIntOrNull()
         val capacidad = inputCapacidad.text.toString().toIntOrNull() ?: 4
@@ -141,6 +161,12 @@ class AdminMesasFragment : Fragment() {
         }
     }
 
+    /**
+     * Muestra un diálogo de confirmación antes de proceder con la eliminación
+     * de una mesa seleccionada del sistema.
+     * 
+     * @param mesa El objeto mesa que se desea borrar.
+     */
     private fun eliminarMesa(mesa: Mesa) {
         android.app.AlertDialog.Builder(requireContext())
             .setTitle("Eliminar Mesa ${mesa.numero}")

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FAFAFA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/btn_atras_admin_habitaciones"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="←"
+            android:textSize="20sp"
+            android:layout_marginRight="8dp"
+            android:background="@color/button_color"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Administrar Habitaciones"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#2196F3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:background="@drawable/card_bg"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Agregar Nueva Habitacion"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/input_numero_habitacion"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Numero"
+            android:inputType="number"
+            android:padding="8dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/input_tipo_habitacion"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Tipo (ej: Individual, Doble)"
+            android:padding="8dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/input_precio_habitacion"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Precio noche"
+            android:inputType="numberDecimal"
+            android:padding="8dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/input_capacidad_habitacion"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:hint="Capacidad"
+            android:inputType="number"
+            android:padding="8dp"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btn_agregar_habitacion"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Agregar Habitacion"
+            android:textSize="12sp"
+            android:background="@color/success_green"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_total_habitaciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Total: 0 habitaciones"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="#2196F3"
+        android:layout_marginBottom="12dp" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_admin_habitaciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_admin_habitaciones"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/text_vacio_admin_habitaciones"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Cargando..."
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textColor="#757575"
+        android:textSize="16sp" />
+
+</LinearLayout>

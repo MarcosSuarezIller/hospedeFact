@@ -15,7 +15,10 @@ import com.example.hospedefact.R
 import com.example.hospedefact.data.models.Huesped
 import android.app.AlertDialog
 import android.widget.EditText
+import android.widget.Spinner
 import androidx.navigation.fragment.findNavController
+import com.example.hospedefact.data.models.Habitacion
+import com.example.hospedefact.ui.habitaciones.HabitacionViewModel
 
 /**
  * ListaHuespedesFragment
@@ -124,28 +127,99 @@ class ListaHuespedesFragment : Fragment() {
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.dialog_nuevo_huesped, null)
 
-        val inputNombre = view.findViewById<EditText>(R.id.input_nombre)
-        val inputEmail = view.findViewById<EditText>(R.id.input_email)
-        val inputTelefono = view.findViewById<EditText>(R.id.input_telefono)
-        val inputHabitacion = view.findViewById<EditText>(R.id.input_habitacion)
+        val inputNombre = view.findViewById<EditText>(R.id.input_nombre_huesped)
+        val spinnerHabitacion = view.findViewById<Spinner>(R.id.spinner_habitacion)
+        val btnCrear = view.findViewById<Button>(R.id.btn_crear_huesped_dialog)
+        val btnCancelar = view.findViewById<Button>(R.id.btn_cancelar_huesped_dialog)
 
-        AlertDialog.Builder(context)
-            .setTitle("Nuevo Huésped")
-            .setView(view)
-            .setPositiveButton("Crear") { _, _ ->
-                val nombre = inputNombre.text.toString().trim()
-                val email = inputEmail.text.toString().trim()
-                val telefono = inputTelefono.text.toString().trim()
-                val habitacion = inputHabitacion.text.toString().trim()
+        val habitacionViewModel = HabitacionViewModel()
+        var habitacionSeleccionada: Habitacion? = null
 
-                if (nombre.isNotEmpty() && habitacion.isNotEmpty()) {
-                    crearHuesped(nombre, email, telefono, habitacion)
-                } else {
-                    Toast.makeText(context, "Completa nombre y habitación", Toast.LENGTH_SHORT).show()
+        habitacionViewModel.cargarHabitaciones().observe(viewLifecycleOwner) { resultado ->
+            when (resultado) {
+                is List<*> -> {
+                    @Suppress("UNCHECKED_CAST")
+                    val habitaciones = (resultado as? List<Habitacion>)?.toList() ?: emptyList()
+
+                    if (habitaciones.isEmpty()) {
+                        Toast.makeText(context, "No hay habitaciones disponibles", Toast.LENGTH_SHORT).show()
+                        return@observe
+                    }
+
+                    val adapter = android.widget.ArrayAdapter(
+                        requireContext(),
+                        android.R.layout.simple_spinner_item,
+                        habitaciones.map { "Hab ${it.numero} - ${it.tipo} (€${String.format("%.2f", it.precioNoche)})" }
+                    )
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    spinnerHabitacion.adapter = adapter
+
+                    spinnerHabitacion.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
+                            habitacionSeleccionada = habitaciones.getOrNull(position)
+                        }
+
+                        override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {
+                            habitacionSeleccionada = null
+                        }
+                    }
+                }
+                is String -> {
+                    if (resultado.startsWith("error")) {
+                        Toast.makeText(context, resultado, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
-            .setNegativeButton("Cancelar", null)
-            .show()
+        }
+
+        val dialog = android.app.AlertDialog.Builder(requireContext())
+            .setView(view)
+            .setCancelable(false)
+            .create()
+
+        btnCancelar.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnCrear.setOnClickListener {
+            val nombre = inputNombre.text.toString().trim()
+            val habitacion = habitacionSeleccionada
+
+            if (nombre.isEmpty()) {
+                Toast.makeText(context, "Ingresa el nombre del huesped", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (habitacion == null) {
+                Toast.makeText(context, "Selecciona una habitacion", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val huesped = Huesped(
+                nombre = nombre,
+                habitacion = "Hab ${habitacion.numero}",
+                habitacionId = habitacion.id,
+                precioNocheHabitacion = habitacion.precioNoche,
+                estado = "activo",
+                fechaEntrada = System.currentTimeMillis()
+            )
+
+            val huespedViewModel = HuespedViewModel()
+            huespedViewModel.crearHuesped(huesped).observe(viewLifecycleOwner) { resultado ->
+                when (resultado) {
+                    "exito" -> {
+                        Toast.makeText(context, "Huesped creado", Toast.LENGTH_SHORT).show()
+                        cargarHuespedes()
+                        dialog.dismiss()
+                    }
+                    else -> {
+                        Toast.makeText(context, resultado, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+
+        dialog.show()
     }
 
     /**

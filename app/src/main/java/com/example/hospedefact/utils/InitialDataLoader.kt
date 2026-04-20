@@ -8,8 +8,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 /**
- * Carga datos iniciales en Firestore
- * Se ejecuta una sola vez
+ * Objeto utilitario encargado de poblar la base de datos de Firestore con datos iniciales.
+ * Se utiliza principalmente durante la primera ejecución para garantizar que el sistema
+ * cuente con un catálogo base de productos y servicios.
  */
 object InitialDataLoader {
 
@@ -17,7 +18,9 @@ object InitialDataLoader {
     private val menuRepository = MenuRepository()
 
     /**
-     * Carga menú inicial
+     * Inicia la carga del menú básico de restauración (bebidas, comidas y postres).
+     * El método verifica primero si ya existen datos para evitar duplicidades y ejecuta
+     * la persistencia en un hilo secundario mediante [Dispatchers.IO].
      */
     fun cargarMenuInicial() {
         GlobalScope.launch(Dispatchers.IO) {

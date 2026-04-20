@@ -20,39 +20,21 @@ class HuespedViewModel(
     }
 
     /**
-     * Crea un nuevo huésped
+     * Registra un nuevo huésped en el sistema a través del repositorio.
+     * Valida que los campos obligatorios (nombre y habitación) no estén vacíos.
      *
-     * @param nombre Nombre del huésped
-     * @param email Email de contacto
-     * @param telefono Teléfono de contacto
-     * @param habitacion Número de habitación
-     *
-     * @return LiveData que emite "exito" o "error: mensaje"
+     * @param huesped El objeto [Huesped] con la información a persistir.
+     * @return [LiveData] que emite el estado del proceso: "exito", "cargando" o un mensaje de "error:".
      */
-    fun crearHuesped(
-        nombre: String,
-        email: String,
-        telefono: String,
-        habitacion: String
-    ) = liveData(Dispatchers.IO) {
+    fun crearHuesped(huesped: Huesped) = liveData(Dispatchers.IO) {
         try {
-            Log.d(TAG, "Creando nuevo huésped: $nombre")
+            Log.d(TAG, "Creando nuevo huésped: ${huesped.nombre}")
 
             // Valida que los campos no estén vacíos
-            if (nombre.isEmpty() || habitacion.isEmpty()) {
+            if (huesped.nombre.isEmpty() || huesped.habitacion.isEmpty()) {
                 emit("error: Completa todos los campos")
                 return@liveData
             }
-
-            // Crea objeto Huesped
-            val huesped = Huesped(
-                nombre = nombre,
-                email = email,
-                telefono = telefono,
-                habitacion = habitacion,
-                fechaEntrada = System.currentTimeMillis(),
-                estado = "activo"
-            )
 
             // Llama al repository
             val resultado = repository.crearHuesped(huesped)
@@ -74,9 +56,34 @@ class HuespedViewModel(
     }
 
     /**
-     * Obtiene lista de todos los huéspedes activos
-     *
-     * @return LiveData que emite lista o "error: mensaje"
+     * Método de conveniencia para crear un huésped a partir de campos individuales.
+     * 
+     * @param nombre Nombre completo del huésped.
+     * @param email Correo electrónico de contacto.
+     * @param telefono Número de teléfono.
+     * @param habitacion Identificador o nombre de la habitación asignada.
+     * @return [LiveData] con el resultado de la operación de creación.
+     */
+    fun crearHuesped(
+        nombre: String,
+        email: String,
+        telefono: String,
+        habitacion: String
+    ) = crearHuesped(
+        Huesped(
+            nombre = nombre,
+            email = email,
+            telefono = telefono,
+            habitacion = habitacion,
+            fechaEntrada = System.currentTimeMillis(),
+            estado = "activo"
+        )
+    )
+
+    /**
+     * Inicia la carga de la lista de huéspedes activos desde Firestore.
+     * 
+     * @return [LiveData] que emite el estado "cargando", la lista de [Huesped] o un mensaje de error.
      */
     fun cargarHuespedes() = liveData(Dispatchers.IO) {
         try {
@@ -102,10 +109,10 @@ class HuespedViewModel(
     }
 
     /**
-     * Obtiene un huésped específico por ID
+     * Recupera la información de un huésped específico por su identificador.
      *
-     * @param huespedId ID del huésped
-     * @return LiveData que emite el Huesped o null
+     * @param huespedId ID único del huésped en el sistema.
+     * @return [LiveData] que emite el objeto [Huesped] encontrado o null en caso de error.
      */
     fun obtenerHuespedPorId(huespedId: String) = liveData(Dispatchers.IO) {
         try {
@@ -129,10 +136,10 @@ class HuespedViewModel(
     }
 
     /**
-     * Actualiza datos de un huésped
+     * Envía una solicitud de actualización de los datos de un huésped existente.
      *
-     * @param huesped Objeto Huesped con datos actualizados
-     * @return LiveData que emite "exito" o "error: mensaje"
+     * @param huesped Objeto [Huesped] que contiene el ID y los nuevos valores.
+     * @return [LiveData] que notifica el resultado ("exito" o "error:").
      */
     fun actualizarHuesped(huesped: Huesped) = liveData(Dispatchers.IO) {
         try {
@@ -158,10 +165,10 @@ class HuespedViewModel(
     }
 
     /**
-     * Marca un huésped como checkout (baja lógica)
+     * Procesa la baja (checkout) de un huésped del hotel.
      *
-     * @param huespedId ID del huésped
-     * @return LiveData que emite "exito" o "error: mensaje"
+     * @param huespedId ID único del huésped que abandona el establecimiento.
+     * @return [LiveData] que emite el resultado de la transacción.
      */
     fun darDeAltaHuesped(huespedId: String) = liveData(Dispatchers.IO) {
         try {

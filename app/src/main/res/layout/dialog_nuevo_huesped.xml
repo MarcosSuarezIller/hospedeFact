@@ -3,58 +3,77 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#FAFAFA">
 
-    <!-- Campo Nombre -->
-    <EditText
-        android:id="@+id/input_nombre"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="👤 Nombre *"
-        android:inputType="text"
-        android:padding="12dp"
-        android:background="@drawable/edit_text_bg"
-        android:layout_marginBottom="12dp" />
-
-    <!-- Campo Email -->
-    <EditText
-        android:id="@+id/input_email"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="📧 Email"
-        android:inputType="textEmailAddress"
-        android:padding="12dp"
-        android:background="@drawable/edit_text_bg"
-        android:layout_marginBottom="12dp" />
-
-    <!-- Campo Teléfono -->
-    <EditText
-        android:id="@+id/input_telefono"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="📱 Teléfono"
-        android:inputType="phone"
-        android:padding="12dp"
-        android:background="@drawable/edit_text_bg"
-        android:layout_marginBottom="12dp" />
-
-    <!-- Campo Habitación -->
-    <EditText
-        android:id="@+id/input_habitacion"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="🛏️ Habitación *"
-        android:inputType="text"
-        android:padding="12dp"
-        android:background="@drawable/edit_text_bg"
-        android:layout_marginBottom="12dp" />
-
-    <!-- Nota -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="* Campos obligatorios"
-        android:textSize="12sp"
-        android:textColor="#757575" />
+        android:text="Crear Nuevo Huesped"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#2196F3"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre"
+        android:textSize="13sp"
+        android:textColor="#757575"
+        android:layout_marginBottom="4dp" />
+
+    <EditText
+        android:id="@+id/input_nombre_huesped"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Nombre del huesped"
+        android:padding="12dp"
+        android:background="@drawable/edit_text_bg"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Habitacion"
+        android:textSize="13sp"
+        android:textColor="#757575"
+        android:layout_marginBottom="4dp" />
+
+    <Spinner
+        android:id="@+id/spinner_habitacion"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/edit_text_bg"
+        android:layout_marginBottom="16dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancelar_huesped_dialog"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:text="Cancelar"
+            android:textSize="14sp"
+            android:layout_marginRight="8dp"
+            android:background="@color/button_color"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_crear_huesped_dialog"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:text="Crear"
+            android:textSize="14sp"
+            android:layout_marginLeft="8dp"
+            android:background="@color/success_green"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
 
 </LinearLayout>

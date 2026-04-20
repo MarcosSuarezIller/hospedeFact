@@ -81,6 +81,16 @@
             android:textColor="#FFFFFF" />
 
         <Button
+            android:id="@+id/btn_factura_salida"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Factura de Salida"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/secondary_green"
+            android:textColor="#FFFFFF" />
+
+        <Button
             android:id="@+id/btn_compartir"
             android:layout_width="0dp"
             android:layout_height="56dp"
