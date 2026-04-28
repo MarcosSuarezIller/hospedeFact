@@ -487,7 +487,7 @@ Este proyecto está bajo licencia MIT. Ver [LICENSE](LICENSE) para más detalles
 ## Autor
 
 **Marcos Suárez Illerías**
-- Email: marcos.suarez@gmail.com
+- Email: marcos.saja@gmail.com
 - GitHub: [@MarcosSuarezIller](https://github.com/MarcosSuarezIller)
 - Proyecto Final de DAM - IES Augusto González de Linares (2024-2025)
 
